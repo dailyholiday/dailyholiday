@@ -272,6 +272,33 @@
         width: 95%;
         height: 500px;
       }
+
+      .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 20px;
+        right: 20px;
+        background-color: #25d366;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+  
+    .whatsapp-float:hover {
+        background-color: #1ebe5d;
+        transform: scale(1.1);
+    }
+  
+    .whatsapp-float i {
+        margin-top: 2px;
     }
   </style>
 </head>
@@ -356,6 +383,16 @@
     </div>
   </section>
 
+  <a
+  href="https://wa.me/6281381338233"
+  class="whatsapp-float"
+  target="_blank"
+  aria-label="Chat on WhatsApp"
+  >
+  <i class="fa-brands fa-whatsapp"></i>
+  </a>
+  
+
   <footer id="contact">
     <p>© 2025 Daily Holiday. All Rights Reserved.</p>
   </footer>
@@ -366,5 +403,6 @@
   </script>
 </body>
 </html>
+
 
 
