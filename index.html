@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome (for icons) -->
+  <!-- ✅ Correct Font Awesome (single latest version) -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -77,7 +77,7 @@
 
     #home {
       height: 100vh;
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2000') center/cover no-repeat;
       color: white;
       display: flex;
       align-items: center;
@@ -91,7 +91,6 @@
       border-radius: 50%;
       margin-bottom: 20px;
       image-rendering: crisp-edges;
-      image-rendering: pixelated;
     }
 
     #home p {
@@ -146,10 +145,11 @@
 
     .destination img {
       width: 100%;
-      height: 250px;
+      height: 300px;
       object-fit: cover;
       display: block;
       transition: transform 0.5s ease;
+      image-rendering: crisp-edges;
     }
 
     .destination:hover img {
@@ -226,20 +226,19 @@
     }
 
     .social-icons {
-      margin-top: 20px;
+      margin-top: 25px;
     }
 
     .social-icons a {
       color: #0078FF;
       font-size: 2rem;
       margin: 0 15px;
-      transition: 0.3s;
-      display: inline-block;
+      transition: 0.3s ease;
     }
 
     .social-icons a:hover {
       color: #005ed6;
-      transform: scale(1.1);
+      transform: scale(1.15);
     }
 
     footer {
@@ -275,8 +274,6 @@
       }
     }
   </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
 </head>
 <body id="top">
   <header>
@@ -312,28 +309,28 @@
   <section id="destinations">
     <h2>International Destinations</h2>
     <div class="grid">
-      <div class="destination"><img src="https://images.unsplash.com/photo-1518544801976-3e159e5c5a57?auto=format&fit=crop&w=900&q=80" alt="Japan"><span>Japan</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1586259358913-94d43e1845e8?auto=format&fit=crop&w=900&q=80" alt="Korea"><span>Korea</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1538688423619-a81d3f23454b?auto=format&fit=crop&w=900&q=80" alt="China"><span>China</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1518544801976-3e159e5c5a57?w=2000&q=90" alt="Japan"><span>Japan</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1586259358913-94d43e1845e8?w=2000&q=90" alt="Korea"><span>Korea</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1538688423619-a81d3f23454b?w=2000&q=90" alt="China"><span>China</span></div>
       <div class="destination"><img src="turkey.jpg" alt="Turkey"><span>Turkey</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80" alt="Singapore"><span>Singapore</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1526481280698-8fccb54f87f0?auto=format&fit=crop&w=900&q=80" alt="Thailand"><span>Thailand</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1509057199576-632a47484ece?auto=format&fit=crop&w=900&q=80" alt="Vietnam"><span>Vietnam</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1502786129293-79981df4e689?auto=format&fit=crop&w=900&q=80" alt="New Zealand"><span>New Zealand</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=2000&q=90" alt="Singapore"><span>Singapore</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1526481280698-8fccb54f87f0?w=2000&q=90" alt="Thailand"><span>Thailand</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1509057199576-632a47484ece?w=2000&q=90" alt="Vietnam"><span>Vietnam</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1502786129293-79981df4e689?w=2000&q=90" alt="New Zealand"><span>New Zealand</span></div>
     </div>
   </section>
 
   <section id="domestic">
     <h2>Domestic Destinations</h2>
     <div class="grid">
-      <div class="destination"><img src="https://images.unsplash.com/photo-1610970878459-3244d1d9a499?auto=format&fit=crop&w=900&q=80" alt="Bandung"><span>Bandung</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1610970878459-3244d1d9a499?w=2000&q=90" alt="Bandung"><span>Bandung</span></div>
       <div class="destination"><img src="bali.heic" alt="Bali"><span>Bali</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1619866597471-9b56bb5a06cb?auto=format&fit=crop&w=900&q=80" alt="Bromo"><span>Bromo</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1579165466741-3f8c1c1d70b4?auto=format&fit=crop&w=900&q=80" alt="Malang"><span>Malang</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1508253578933-e37fbcbd1e7b?auto=format&fit=crop&w=900&q=80" alt="Jakarta"><span>Jakarta</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1631085270159-c5fdafea812f?auto=format&fit=crop&w=900&q=80" alt="Labuan Bajo"><span>Labuan Bajo</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1663160502082-2b5cfd1c8dbd?auto=format&fit=crop&w=900&q=80" alt="Wonosobo"><span>Wonosobo</span></div>
-      <div class="destination"><img src="https://images.unsplash.com/photo-1632440208802-1d8aaf69b3c3?auto=format&fit=crop&w=900&q=80" alt="Dieng"><span>Dieng</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1619866597471-9b56bb5a06cb?w=2000&q=90" alt="Bromo"><span>Bromo</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1579165466741-3f8c1c1d70b4?w=2000&q=90" alt="Malang"><span>Malang</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1508253578933-e37fbcbd1e7b?w=2000&q=90" alt="Jakarta"><span>Jakarta</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1631085270159-c5fdafea812f?w=2000&q=90" alt="Labuan Bajo"><span>Labuan Bajo</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1663160502082-2b5cfd1c8dbd?w=2000&q=90" alt="Wonosobo"><span>Wonosobo</span></div>
+      <div class="destination"><img src="https://images.unsplash.com/photo-1632440208802-1d8aaf69b3c3?w=2000&q=90" alt="Dieng"><span>Dieng</span></div>
     </div>
   </section>
 
@@ -354,7 +351,7 @@
       <p><strong>Address:</strong><br>Ruko Scientia Residence<br>Jl. Scientia Square Utara No.61<br>Kelapa Dua, Kab. Tangerang</p>
     </div>
     <div class="social-icons">
-      <a href="https://www.facebook.com/dailyholidaytour/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.facebook.com/dailyholidaytour/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
       <a href="https://www.instagram.com/dailyholiday_travel/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
     </div>
   </section>
@@ -367,11 +364,5 @@
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.addEventListener('load', () => window.scrollTo(0, 0));
   </script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
-
-
-
-
