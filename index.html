@@ -1,166 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daily Holiday</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (for icons) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-KzJf5+4fP6GYYx9LM3j6YdlMnB+AKTSPV0XkV6mXUgQvUMoP31N/1lqCFfUyyAovP5lryYrOIJ7Y9RzlFqkP0A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; font-family: 'Poppins', sans-serif; }
-    body { background: #fdfdfd; color: #333; line-height: 1.6; }
-    h1,h2 { text-align:center; color:#1e88e5; }
-    section { padding: 80px 20px; max-width:1000px; margin:auto; }
-
-    /* ---------- Navbar ---------- */
-    nav {
-      position: sticky; top: 0; width:100%; background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index:100;
-      display:flex; justify-content:space-between; align-items:center; padding:10px 30px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
     }
-    .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
-    .logo img { height:50px; width:50px; border-radius:50%; object-fit:cover; }
-    .logo-text { font-size:1.4rem; font-weight:600; color:#1e88e5; }
-    nav ul { list-style:none; display:flex; gap:25px; }
-    nav ul li a { color:#333; text-decoration:none; font-weight:500; transition:color 0.3s; }
-    nav ul li a:hover { color:#1e88e5; }
 
-    /* ---------- Header ---------- */
     header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 40px;
+    }
+
+    header img {
+      height: 50px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+
+    header h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 28px;
+      color: #0078FF;
+      font-weight: 400;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #0078FF;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #005ed6;
+    }
+
+    section {
+      padding: 100px 10%;
+    }
+
+    #home {
+      height: 100vh;
       background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
-      color:white; text-align:center; padding:140px 20px;
-    }
-    header h1 { font-size:3rem; text-shadow:0 2px 8px rgba(0,0,0,0.5); }
-    header p { font-size:1.2rem; margin-top:10px; text-shadow:0 1px 6px rgba(0,0,0,0.4); }
-
-    /* ---------- About Section ---------- */
-    .about { text-align:center; }
-    .about p { margin-top:20px; font-size:1.1rem; color:#555; max-width:800px; margin-left:auto; margin-right:auto; }
-
-    /* ---------- Instagram Gallery ---------- */
-    .instagram-section { text-align:center; }
-    .insta-gallery {
-      display:flex; overflow-x:auto; gap:15px; padding:40px 0;
-      scroll-snap-type:x mandatory; scrollbar-width:thin;
-      justify-content:center;
-    }
-    .insta-gallery::-webkit-scrollbar { height:8px; }
-    .insta-gallery::-webkit-scrollbar-thumb { background:#1e88e5; border-radius:10px; }
-    .insta-item { flex:0 0 auto; scroll-snap-align:start; position:relative; cursor:pointer; }
-    .insta-item img {
-      width:250px; height:250px; object-fit:cover; border-radius:12px;
-      transition:transform 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-    .insta-item img:hover { transform:scale(1.05); }
-
-    /* ---------- Popup Modal ---------- */
-    .modal {
-      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:200;
-    }
-    .modal img {
-      max-width:90%; max-height:80%; border-radius:10px; box-shadow:0 0 20px rgba(255,255,255,0.2);
-    }
-    .modal .close {
-      position:absolute; top:20px; right:30px; color:white; font-size:2rem; cursor:pointer;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
     }
 
-    /* ---------- Footer ---------- */
-    footer { background:#1e88e5; color:white; text-align:center; padding:40px 20px; }
-    footer a { color:#fff; margin:0 10px; text-decoration:none; transition:opacity .3s; }
-    footer a:hover { opacity:.8; }
+    #home img {
+      width: 200px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
 
-    /* ---------- Responsive ---------- */
-    @media (max-width:768px) {
-      .insta-item img { width:180px; height:180px; }
+    #home p {
+      font-size: 1.3rem;
+      margin-top: 10px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    #about {
+      text-align: center;
+      padding-top: 120px;
+    }
+
+    #about h2 {
+      font-size: 32px;
+      color: #0078FF;
+      margin-bottom: 20px;
+    }
+
+    #about p {
+      max-width: 700px;
+      margin: auto;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* Destination Grid */
+    #destinations, #domestic {
+      background: #f9f9f9;
+      padding-top: 120px;
+      text-align: center;
+    }
+
+    #destinations h2, #domestic h2 {
+      font-size: 32px;
+      color: #0078FF;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 0;
+      width: 100%;
+    }
+
+    .grid img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Instagram */
+    #instagram {
+      background: white;
+      text-align: center;
+      padding-top: 120px;
+      margin-bottom: 60px;
+    }
+
+    #instagram h2 {
+      font-size: 32px;
+      color: #0078FF;
+      margin-bottom: 30px;
+    }
+
+    #instagram iframe {
+      border: none;
+      width: 80%;
+      height: 700px;
+      border-radius: 10px;
+      overflow-y: scroll;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Join Us */
+    #joinus {
+      background: #f5f8ff;
+      padding: 80px 10%;
+      text-align: center;
+    }
+
+    #joinus h2 {
+      font-size: 32px;
+      color: #0078FF;
+      margin-bottom: 20px;
+    }
+
+    #joinus p {
+      max-width: 700px;
+      margin: 10px auto 30px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    .contact-info p {
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .social-icons {
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      color: #0078FF;
+      font-size: 2rem;
+      margin: 0 15px;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .social-icons a:hover {
+      color: #005ed6;
+      transform: scale(1.1);
+    }
+
+    footer {
+      background: #0078FF;
+      color: white;
+      text-align: center;
+      padding: 40px 10px;
+      margin-top: 0;
+    }
+
+    footer p {
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      #instagram iframe {
+        width: 95%;
+        height: 500px;
+      }
     }
   </style>
 </head>
-<body>
-
-  <!-- Navbar -->
-  <nav>
-    <a href="#home" class="logo" id="logo-link">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo">
-      <span class="logo-text">Daily Holiday</span>
-    </a>
-
-    <ul>
-      <li><a href="#home" id="home-link">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#instagram">Instagram</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- Hero Section -->
-  <header id="home">
-    <h1>Daily Holiday</h1>
-    <p>Your journey begins here — explore the world with us!</p>
+<body id="top">
+  <header>
+    <div style="display:flex;align-items:center;">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo" />
+      <h1>Daily Holiday</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#destinations">International</a></li>
+        <li><a href="#domestic">Domestic</a></li>
+        <li><a href="#instagram">Promo</a></li>
+        <li><a href="#joinus">Join Us</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <!-- About -->
-  <section class="about" id="about">
+  <section id="home">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo" />
+    <p>YOUR EVERYDAY PARTNER ✈️</p>
+  </section>
+
+  <section id="about">
     <h2>About Us</h2>
     <p>
-      Daily Holiday is your trusted travel companion, crafting unforgettable adventures across the globe.
-      We specialize in curated trips, comfortable accommodations, and stress-free travel experiences.
-      Whether you’re seeking adventure, relaxation, or cultural exploration — we make every holiday a daily celebration.
+      Daily Holiday is your trusted travel companion. We specialize in curated tours and unforgettable holiday experiences worldwide.
+      From Asia to Australia, our mission is to make your travel dreams come true with seamless planning and local expertise.
     </p>
   </section>
 
-  <!-- Instagram (Gallery Only, No Title) -->
-  <section class="instagram-section" id="instagram">
-    <div class="insta-gallery" id="insta-gallery">
-      <div class="insta-item"><img src="https://source.unsplash.com/random/250x250?bali" alt="Daily Holiday Instagram post 1"></div>
-      <div class="insta-item"><img src="https://source.unsplash.com/random/250x250?travel" alt="Daily Holiday Instagram post 2"></div>
-      <div class="insta-item"><img src="https://source.unsplash.com/random/250x250?mountain" alt="Daily Holiday Instagram post 3"></div>
-      <div class="insta-item"><img src="https://source.unsplash.com/random/250x250?island" alt="Daily Holiday Instagram post 4"></div>
-      <div class="insta-item"><img src="https://source.unsplash.com/random/250x250?adventure" alt="Daily Holiday Instagram post 5"></div>
+  <section id="destinations">
+    <h2>International Destinations</h2>
+    <div class="grid">
+      <img src="https://images.unsplash.com/photo-1518544801976-3e159e5c5a57?auto=format&fit=crop&w=900&q=80" alt="Japan">
+      <img src="https://images.unsplash.com/photo-1586259358913-94d43e1845e8?auto=format&fit=crop&w=900&q=80" alt="Korea">
+      <img src="https://images.unsplash.com/photo-1538688423619-a81d3f23454b?auto=format&fit=crop&w=900&q=80" alt="China">
+      <img src="https://images.unsplash.com/photo-1583209814684-d8987b6a43b0?auto=format&fit=crop&w=900&q=80" alt="Malaysia">
+      <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80" alt="Singapore">
+      <img src="https://images.unsplash.com/photo-1526481280698-8fccb54f87f0?auto=format&fit=crop&w=900&q=80" alt="Thailand">
+      <img src="https://images.unsplash.com/photo-1509057199576-632a47484ece?auto=format&fit=crop&w=900&q=80" alt="Vietnam">
+      <img src="https://images.unsplash.com/photo-1502786129293-79981df4e689?auto=format&fit=crop&w=900&q=80" alt="New Zealand">
     </div>
   </section>
 
-  <!-- Footer -->
+  <section id="domestic">
+    <h2>Domestic Destinations</h2>
+    <div class="grid">
+      <img src="https://images.unsplash.com/photo-1610970878459-3244d1d9a499?auto=format&fit=crop&w=900&q=80" alt="Bandung">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" alt="Bali">
+      <img src="https://images.unsplash.com/photo-1619866597471-9b56bb5a06cb?auto=format&fit=crop&w=900&q=80" alt="Bromo">
+      <img src="https://images.unsplash.com/photo-1579165466741-3f8c1c1d70b4?auto=format&fit=crop&w=900&q=80" alt="Malang">
+      <img src="https://images.unsplash.com/photo-1508253578933-e37fbcbd1e7b?auto=format&fit=crop&w=900&q=80" alt="Jakarta">
+      <img src="https://images.unsplash.com/photo-1631085270159-c5fdafea812f?auto=format&fit=crop&w=900&q=80" alt="Labuan Bajo">
+      <img src="https://images.unsplash.com/photo-1663160502082-2b5cfd1c8dbd?auto=format&fit=crop&w=900&q=80" alt="Wonosobo">
+      <img src="https://images.unsplash.com/photo-1632440208802-1d8aaf69b3c3?auto=format&fit=crop&w=900&q=80" alt="Dieng">
+    </div>
+  </section>
+
+  <section id="instagram">
+    <h2>Take a look at our latest promo!</h2>
+    <iframe src="https://www.instagram.com/dailyholiday_travel/embed" allowfullscreen></iframe>
+  </section>
+
+  <section id="joinus">
+    <h2>Join the Daily Holiday Experience!</h2>
+    <p>
+      Partner with Daily Holiday to access exclusive travel deals, seamless trip planning, and unforgettable journeys.
+      Let’s make your travel dreams come true — together!
+    </p>
+    <div class="contact-info">
+      <p><strong>Phone:</strong> +6281381338233</p>
+      <p><strong>Email:</strong> <a href="mailto:partners@dailyholiday.co.id" style="color:#0078FF;text-decoration:none;">partners@dailyholiday.co.id</a></p>
+      <p><strong>Address:</strong><br>Ruko Scientia Residence<br>Jl. Scientia Square Utara No.61<br>Kelapa Dua, Kab. Tangerang</p>
+    </div>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/dailyholidaytour/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/dailyholiday_travel/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    </div>
+  </section>
+
   <footer id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:info@dailyholiday.com">info@dailyholiday.com</a></p>
-    <p>Instagram: <a href="https://www.instagram.com/dailyholiday_travel/" target="_blank" rel="noopener">@dailyholiday_travel</a></p>
-    <p>© 2025 Daily Holiday. All rights reserved.</p>
+    <p>© 2025 Daily Holiday. All Rights Reserved.</p>
   </footer>
 
-  <!-- Image Popup Modal -->
-  <div class="modal" id="modal">
-    <span class="close" id="close-btn">&times;</span>
-    <img id="modal-img" src="" alt="popup image">
-  </div>
-
-  <!-- JS -->
   <script>
-    // Scroll to top on refresh
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    window.addEventListener('load', () => window.scrollTo({ top: 0, behavior: 'auto' }));
-
-    // Smooth scroll to top for logo and home
-    document.getElementById('home-link').addEventListener('click', e => {
-      e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-    document.getElementById('logo-link').addEventListener('click', e => {
-      e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Modal functionality
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modal-img');
-    const closeBtn = document.getElementById('close-btn');
-
-    document.querySelectorAll('.insta-item img').forEach(img => {
-      img.addEventListener('click', () => {
-        modal.style.display = 'flex';
-        modalImg.src = img.src;
-      });
-    });
-
-    closeBtn.addEventListener('click', () => modal.style.display = 'none');
-    window.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+    window.addEventListener('load', () => window.scrollTo(0, 0));
   </script>
-
 </body>
 </html>
