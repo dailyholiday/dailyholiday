@@ -74,6 +74,18 @@
     }
 
     @media (max-width: 768px) {
+      header {
+        justify-content: space-between;
+      }
+      
+      header div[style*="display:flex"] {
+        flex: 1;
+        justify-content: flex-start;
+      }
+      
+      .menu-toggle {
+        margin-left: auto;
+      }
       nav ul {
         display: none;
         position: absolute;
@@ -428,6 +440,11 @@
   </a>
 
   <script>
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('show');
+      document.body.style.overflow = menu.classList.contains('show') ? 'hidden' : 'auto';
+    });
+    
     const toggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
     const links = document.querySelectorAll('#menu a');
@@ -444,6 +461,7 @@
   </script>
 </body>
 </html>
+
 
 
 
