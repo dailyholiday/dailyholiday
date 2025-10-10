@@ -53,7 +53,6 @@
       font-weight: 400;
     }
 
-    /* Navbar */
     nav ul {
       list-style: none;
       display: flex;
@@ -71,7 +70,7 @@
       color: #005ed6;
     }
 
-    /* Hamburger */
+    /* Hamburger menu */
     .menu-toggle {
       display: none;
       font-size: 26px;
@@ -98,8 +97,8 @@
       width: 200px;
       border-radius: 50%;
       margin-bottom: 20px;
-      image-rendering: crisp-edges;
-      image-rendering: pixelated;
+      image-rendering: auto;
+      image-rendering: -webkit-optimize-contrast;
     }
 
     #home p {
@@ -122,6 +121,9 @@
       width: 400px;
       border-radius: 15px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      object-fit: cover;
+      image-rendering: auto;
+      image-rendering: -webkit-optimize-contrast;
     }
 
     #about .text {
@@ -178,10 +180,14 @@
       object-fit: cover;
       display: block;
       transition: transform 0.5s ease;
+      image-rendering: auto;
+      image-rendering: -webkit-optimize-contrast;
+      filter: none;
     }
 
     .destination:hover img {
-      transform: scale(1.1);
+      transform: scale(1.05);
+      filter: brightness(1.05);
     }
 
     .destination span {
@@ -270,7 +276,6 @@
       transform: scale(1.1);
     }
 
-    /* Footer */
     footer {
       background: #0078FF;
       color: white;
@@ -397,7 +402,7 @@
       <div class="destination"><img src="singapore.jpg" alt="Singapore"><span>Singapore</span></div>
       <div class="destination"><img src="thailand.jpg" alt="Thailand"><span>Thailand</span></div>
       <div class="destination"><img src="vietnam.jpg" alt="Vietnam"><span>Vietnam</span></div>
-      <div class="destination"><img src="new zealand.jpg" alt="New Zealand"><span>New Zealand</span></div>
+      <div class="destination"><img src="newzealand.jpg" alt="New Zealand"><span>New Zealand</span></div>
     </div>
   </section>
 
@@ -409,7 +414,7 @@
       <div class="destination"><img src="bromo.jpg" alt="Bromo"><span>Bromo</span></div>
       <div class="destination"><img src="malang.jpg" alt="Malang"><span>Malang</span></div>
       <div class="destination"><img src="jakarta.jpg" alt="Jakarta"><span>Jakarta</span></div>
-      <div class="destination"><img src="labuan bajo.jpg" alt="Labuan Bajo"><span>Labuan Bajo</span></div>
+      <div class="destination"><img src="labuanbajo.jpg" alt="Labuan Bajo"><span>Labuan Bajo</span></div>
       <div class="destination"><img src="wonosobo.jpg" alt="Wonosobo"><span>Wonosobo</span></div>
       <div class="destination"><img src="dieng.jpg" alt="Dieng"><span>Dieng</span></div>
     </div>
@@ -422,10 +427,7 @@
 
   <section id="joinus">
     <h2>Join the Daily Holiday Experience!</h2>
-    <p>
-      Partner with Daily Holiday to access exclusive travel deals, seamless trip planning, and unforgettable journeys.
-      Let’s make your travel dreams come true — together!
-    </p>
+    <p>Partner with Daily Holiday to access exclusive travel deals, seamless trip planning, and unforgettable journeys. Let’s make your travel dreams come true — together!</p>
     <div class="contact-info">
       <p><strong>Phone:</strong> +6281381338233</p>
       <p><strong>Email:</strong> <a href="mailto:partners@dailyholiday.co.id" style="color:#0078FF;text-decoration:none;">partners@dailyholiday.co.id</a></p>
@@ -454,7 +456,7 @@
       menu.classList.toggle('show');
     });
 
-    // ✅ Close mobile menu when link clicked
+    // ✅ Close dropdown when clicking a link
     links.forEach(link => {
       link.addEventListener('click', () => {
         menu.classList.remove('show');
