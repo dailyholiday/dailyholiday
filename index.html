@@ -4,191 +4,175 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daily Holiday</title>
-  <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" type="image/png">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-  <!-- ✅ Correct Font Awesome (single latest version) -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    integrity="sha512-KzJf5+4fP6GYYx9LM3j6YdlMnB+AKTSPV0XkV6mXUgQvUMoP31N/1lqCFfUyyAovP5lryYrOIJ7Y9RzlFqkP0A=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
-    * {
+    body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
       font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
     }
 
-    header {
-      position: fixed;
+    /* ---------- NAVBAR ---------- */
+    nav {
+      background-color: white;
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100%;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       z-index: 1000;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       padding: 10px 40px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    header img {
-      height: 50px;
-      margin-right: 10px;
-      border-radius: 50%;
-    }
-
-    header h1 {
-      font-family: 'Pacifico', cursive;
+    nav .logo {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
       font-size: 28px;
       color: #0078FF;
-      font-weight: 400;
+      text-decoration: none;
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 20px;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
     }
 
     nav ul li a {
       text-decoration: none;
-      color: #0078FF;
+      color: #333;
       font-weight: 500;
-      transition: 0.3s;
+      transition: color 0.3s;
     }
 
     nav ul li a:hover {
-      color: #005ed6;
+      color: #0078FF;
     }
 
-    section {
-      padding: 100px 10%;
-    }
-
-    #home {
-      height: 100vh;
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2000') center/cover no-repeat;
+    /* ---------- HERO SECTION ---------- */
+    #hero {
+      background: url('hero.jpg') center/cover no-repeat;
       color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
       text-align: center;
+      padding: 150px 20px;
     }
 
-    #home img {
-      width: 200px;
-      border-radius: 50%;
-      margin-bottom: 20px;
-      image-rendering: crisp-edges;
+    #hero img {
+      width: 280px;
+      height: auto;
+      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
     }
 
-    #home p {
-      font-size: 1.3rem;
-      margin-top: 10px;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-    }
-
+    /* ---------- ABOUT US ---------- */
     #about {
-      text-align: center;
-      padding-top: 120px;
+      padding: 60px 20px;
+      text-align: left;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.7;
+      color: #333;
+    }
+
+    .about-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    .about-logo img {
+      width: 180px;
+      height: auto;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
     }
 
     #about h2 {
       font-size: 32px;
       color: #0078FF;
-      margin-bottom: 20px;
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+
+    #about h3 {
+      color: #0078FF;
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: 600;
     }
 
     #about p {
-      max-width: 700px;
-      margin: auto;
-      line-height: 1.6;
-      color: #555;
+      font-size: 1.05rem;
+      margin-bottom: 15px;
+      color: #444;
     }
 
-    /* Destination Grid */
-    #destinations, #domestic {
-      background: #f9f9f9;
-      padding-top: 120px;
+    /* ---------- INTERNATIONAL & DOMESTIC ---------- */
+    .destination-section {
+      padding: 60px 0;
       text-align: center;
     }
 
-    #destinations h2, #domestic h2 {
-      font-size: 32px;
+    .destination-section h2 {
       color: #0078FF;
       margin-bottom: 30px;
     }
 
-    .grid {
+    .destination-gallery {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      grid-gap: 0;
-      width: 100%;
+      gap: 0;
     }
 
-    .destination {
+    .destination-item {
       position: relative;
-      overflow: hidden;
     }
 
-    .destination img {
+    .destination-item img {
       width: 100%;
-      height: 300px;
+      height: 250px;
       object-fit: cover;
+      transition: transform 0.4s ease;
       display: block;
-      transition: transform 0.5s ease;
-      image-rendering: crisp-edges;
     }
 
-    .destination:hover img {
-      transform: scale(1.1);
-    }
-
-    .destination span {
+    .destination-item .overlay {
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      color: white;
-      font-size: 1.5rem;
-      font-weight: 600;
+      right: 0;
+      bottom: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      background: rgba(0, 120, 255, 0.7);
+      color: white;
       opacity: 0;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.3s ease;
+      font-size: 20px;
+      font-weight: 500;
     }
 
-    .destination:hover span {
+    .destination-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .destination-item:hover .overlay {
       opacity: 1;
     }
 
-    /* Instagram */
+    /* ---------- INSTAGRAM ---------- */
     #instagram {
-      background: white;
       text-align: center;
-      padding-top: 120px;
-      margin-bottom: 60px;
+      padding: 60px 0;
+      background-color: #f8f8f8;
     }
 
     #instagram h2 {
-      font-size: 32px;
       color: #0078FF;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     #instagram iframe {
@@ -200,15 +184,14 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       max-width: 800px;
     }
-    
-    /* 📱 Responsive adjustments */
+
     @media (max-width: 768px) {
       #instagram iframe {
         width: 95%;
         height: 450px;
       }
     }
-    
+
     @media (max-width: 480px) {
       #instagram iframe {
         width: 95%;
@@ -216,207 +199,219 @@
       }
     }
 
-    /* Join Us */
+    /* ---------- JOIN US ---------- */
     #joinus {
-      background: #f5f8ff;
-      padding: 80px 10%;
+      padding: 60px 20px;
       text-align: center;
+      background-color: #f0f7ff;
     }
 
     #joinus h2 {
       font-size: 32px;
       color: #0078FF;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      font-weight: 600;
     }
 
     #joinus p {
       max-width: 700px;
-      margin: 10px auto 30px;
-      line-height: 1.6;
-      color: #555;
+      margin: 10px auto 25px;
+      line-height: 1.7;
+      color: #444;
+      font-size: 1.05rem;
     }
 
-    .contact-info p {
-      line-height: 1.6;
-      color: #333;
-    }
-
-    .social-icons {
-      margin-top: 25px;
+    .contact-info {
+      margin-bottom: 20px;
     }
 
     .social-icons a {
       color: #0078FF;
-      font-size: 2rem;
-      margin: 0 15px;
-      transition: 0.3s ease;
+      font-size: 28px;
+      margin: 0 10px;
+      transition: color 0.3s;
     }
 
     .social-icons a:hover {
-      color: #005ed6;
-      transform: scale(1.15);
+      color: #0056cc;
     }
 
+    /* ---------- FOOTER ---------- */
     footer {
-      background: #0078FF;
+      background-color: #0078FF;
       color: white;
       text-align: center;
-      padding: 40px 10px;
-      margin-top: 0;
-    }
-
-    footer p {
+      padding: 15px 0;
       font-size: 14px;
     }
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        padding: 15px;
-      }
-
-      nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      #instagram iframe {
-        width: 95%;
-        height: 500px;
-      }
+    /* ---------- WHATSAPP BUTTON ---------- */
+    .whatsapp-float {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 30px;
+      z-index: 100;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
-      .whatsapp-float {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-        background-color: #25D366;
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 32px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        z-index: 9999;
-        transition: all 0.3s ease-in-out;
-        text-decoration: none;
-      }
 
-      .whatsapp-float:hover {
-        background-color: #1ebe5d;
-        transform: scale(1.1);
-      }
+    .whatsapp-float i {
+      margin-top: 15px;
+    }
 
-      .whatsapp-float i {
-        margin-top: 2px;
-      }
+    .whatsapp-float:hover {
+      background-color: #1ebd5a;
+    }
+
   </style>
 </head>
-<body id="top">
-  <header>
-    <div style="display:flex;align-items:center;">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo" />
-      <h1>Daily Holiday</h1>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="#top">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#destinations">International</a></li>
-        <li><a href="#domestic">Domestic</a></li>
-        <li><a href="#instagram">Promo</a></li>
-        <li><a href="#joinus">Join Us</a></li>
-      </ul>
-    </nav>
-  </header>
+<body>
 
-  <section id="home">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo" />
-    <p>YOUR EVERYDAY PARTNER ✈️</p>
+  <!-- ---------- NAVBAR ---------- -->
+  <nav>
+    <a href="#hero" class="logo">Daily Holiday</a>
+    <ul>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#international">International</a></li>
+      <li><a href="#domestic">Domestic</a></li>
+      <li><a href="#instagram">Promo</a></li>
+      <li><a href="#joinus">Join Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- ---------- HERO SECTION ---------- -->
+  <section id="hero">
+    <img src="logo.png" alt="Daily Holiday Logo">
   </section>
 
+  <!-- ---------- ABOUT US ---------- -->
   <section id="about">
-    <h2>About Us</h2>
+    <div class="about-logo">
+      <img src="logo.png" alt="Daily Holiday Logo">
+    </div>
+
+    <h2>Slogan, Mission, and Vision of Daily Holiday</h2>
+
     <p>
-      Daily Holiday is your trusted travel companion. We specialize in curated tours and unforgettable holiday experiences worldwide.
-      From Asia to Australia, our mission is to make your travel dreams come true with seamless planning and local expertise.
+      Our slogan, <strong><em>“Your Everyday Partner”</em></strong>, is more than just words — 
+      it represents our vision and mission to be more than a mere travel service provider.  
+      We are dedicated to being a daily partner for both our customers and future travelers,  
+      not only during holidays but also in every meaningful moment filled with joy and experiences.
+    </p>
+
+    <h3>• Everyday Partner</h3>
+    <p>
+      We are committed to being an inseparable part of your daily life.  
+      From relaxing moments to special occasions, PT Trindo Nuansa Wisata  
+      aims to be your trusted companion throughout every journey you take.
+    </p>
+
+    <h3>• Beyond Holiday</h3>
+    <p>
+      Our commitment extends far beyond being just a travel agency.  
+      We aspire to become a trusted partner in every supporting aspect —  
+      from restaurants and transportation to accommodations — all closely tied to tourism.  
+      Whether you’re planning a new trip or simply a daily escape,  
+      PT Trindo Nuansa Wisata is ready to provide the best service possible.  
+      Our main mission is to reshape public perception of tourism  
+      by offering trusted and integrity-driven travel services.
+    </p>
+
+    <h3>• Vision of Daily Holiday</h3>
+    <p>
+      Our vision goes beyond conventional limits.  
+      We aim not only to be a travel organizer but also an agent of growth  
+      that drives progress in the tourism industry.  
+      Through innovation and high-quality service,  
+      we strive to deliver joyful travel experiences  
+      and bring happiness to even more people.
     </p>
   </section>
 
-  <section id="destinations">
+  <!-- ---------- INTERNATIONAL SECTION ---------- -->
+  <section id="international" class="destination-section">
     <h2>International Destinations</h2>
-    <div class="grid">
-      <div class="destination"><img src="bali.jpg" alt="Japan"><span>Japan</span></div>
-      <div class="destination"><img src="bali.jpg" alt="Korea"><span>Korea</span></div>
-      <div class="destination"><img src="china.jpg" alt="China"><span>China</span></div>
-      <div class="destination"><img src="turkey.jpg" alt="Turkey"><span>Turkey</span></div>
-      <div class="destination"><img src="bali.jpg" alt="Singapore"><span>Singapore</span></div>
-      <div class="destination"><img src="bali.jpg" alt="Thailand"><span>Thailand</span></div>
-      <div class="destination"><img src="vietnam.jpg" alt="Vietnam"><span>Vietnam</span></div>
-      <div class="destination"><img src="newzealand.jpg" alt="New Zealand"><span>New Zealand</span></div>
+    <div class="destination-gallery">
+      <div class="destination-item"><img src="japan.jpg" alt="Japan"><div class="overlay">Japan</div></div>
+      <div class="destination-item"><img src="singapore.jpg" alt="Singapore"><div class="overlay">Singapore</div></div>
+      <div class="destination-item"><img src="korea.jpg" alt="Korea"><div class="overlay">Korea</div></div>
+      <div class="destination-item"><img src="australia.jpg" alt="Australia"><div class="overlay">Australia</div></div>
+      <div class="destination-item"><img src="thailand.jpg" alt="Thailand"><div class="overlay">Thailand</div></div>
+      <div class="destination-item"><img src="dubai.jpg" alt="Dubai"><div class="overlay">Dubai</div></div>
+      <div class="destination-item"><img src="europe.jpg" alt="Europe"><div class="overlay">Europe</div></div>
+      <div class="destination-item"><img src="turkey.jpg" alt="Turkey"><div class="overlay">Turkey</div></div>
     </div>
   </section>
 
-  <section id="domestic">
+  <!-- ---------- DOMESTIC SECTION ---------- -->
+  <section id="domestic" class="destination-section">
     <h2>Domestic Destinations</h2>
-    <div class="grid">
-      <div class="destination"><img src="bandung.jpg" alt="Bandung"><span>Bandung</span></div>
-      <div class="destination"><img src="bali.jpg" alt="Bali"><span>Bali</span></div>
-      <div class="destination"><img src="bali.jpg" alt="Bromo"><span>Bromo</span></div>
-      <div class="destination"><img src="bali.jpg" alt="Malang"><span>Malang</span></div>
-      <div class="destination"><img src="bali.jpg" alt="Jakarta"><span>Jakarta</span></div>
-      <div class="destination"><img src="bali.jpg" alt="Labuan Bajo"><span>Labuan Bajo</span></div>
-      <div class="destination"><img src="bali.jpg" alt="Wonosobo"><span>Wonosobo</span></div>
-      <div class="destination"><img src="bali.jpg" alt="Dieng"><span>Dieng</span></div>
+    <div class="destination-gallery">
+      <div class="destination-item"><img src="bali.jpg" alt="Bali"><div class="overlay">Bali</div></div>
+      <div class="destination-item"><img src="lombok.jpg" alt="Lombok"><div class="overlay">Lombok</div></div>
+      <div class="destination-item"><img src="labuan bajo.jpg" alt="Labuan Bajo"><div class="overlay">Labuan Bajo</div></div>
+      <div class="destination-item"><img src="jakarta.jpg" alt="Jakarta"><div class="overlay">Jakarta</div></div>
+      <div class="destination-item"><img src="yogyakarta.jpg" alt="Yogyakarta"><div class="overlay">Yogyakarta</div></div>
+      <div class="destination-item"><img src="bromo.jpg" alt="Bromo"><div class="overlay">Bromo</div></div>
+      <div class="destination-item"><img src="belitung.jpg" alt="Belitung"><div class="overlay">Belitung</div></div>
+      <div class="destination-item"><img src="raja ampat.jpg" alt="Raja Ampat"><div class="overlay">Raja Ampat</div></div>
     </div>
   </section>
 
+  <!-- ---------- INSTAGRAM ---------- -->
   <section id="instagram">
     <h2>Take a look at our latest promo!</h2>
-    <iframe src="https://www.instagram.com/dailyholiday_travel/embed" allowfullscreen></iframe>
+    <iframe src="https://snapwidget.com/embed/yourwidgetlink"></iframe>
   </section>
 
+  <!-- ---------- JOIN US ---------- -->
   <section id="joinus">
     <h2>Together with Daily Holiday</h2>
-      <p>
-        Plan your journey with our team of experienced travel experts.  
-        Contact us for a free consultation and get the best advice for your unforgettable travel experience.  
-        We’re ready to answer your questions and provide any information you need.
-      </p>
+    <p>
+      Plan your journey with our team of experienced travel experts.  
+      Contact us for a free consultation and get the best advice for your unforgettable travel experience.  
+      We’re ready to answer your questions and provide any information you need.
+    </p>
+
     <div class="contact-info">
-      <p><strong>Phone:</strong> +62-813-8133-8233</p>
-      <p><strong>Email:</strong> <a href="mailto:partners@dailyholiday.co.id" style="color:#0078FF;text-decoration:none;">partners@dailyholiday.co.id</a></p>
-      <p><strong>Address:</strong><br>Ruko Scientia Residence<br>Jl. Scientia Square Utara No.61<br>Kelapa Dua, Kab. Tangerang</p>
+      <p><strong>Phone:</strong> +6281381338233</p>
+      <p><strong>Email:</strong>
+        <a href="mailto:partners@dailyholiday.co.id" style="color:#0078FF;text-decoration:none;">
+          partners@dailyholiday.co.id
+        </a>
+      </p>
+      <p><strong>Address:</strong><br>
+        Ruko Scientia Residence<br>
+        Jl. Scientia Square Utara No.61<br>
+        Kelapa Dua, Kab. Tangerang
+      </p>
     </div>
+
     <div class="social-icons">
-      <a href="https://www.facebook.com/dailyholidaytour/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-      <a href="https://www.instagram.com/dailyholiday_travel/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.facebook.com/dailyholidaytour/" target="_blank">
+        <i class="fa-brands fa-facebook"></i>
+      </a>
+      <a href="https://www.instagram.com/dailyholiday_travel/" target="_blank">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
     </div>
   </section>
 
-  <a
-  href="https://wa.me/6281381338233"
-  class="whatsapp-float"
-  target="_blank"
-  aria-label="Chat on WhatsApp"
-  >
-  <i class="fa-brands fa-whatsapp"></i>
-  </a>
-  
-
-  <footer id="contact">
-    <p>© 2025 Daily Holiday. All Rights Reserved.</p>
+  <!-- ---------- FOOTER ---------- -->
+  <footer>
+    © 2025 Daily Holiday. All rights reserved.
   </footer>
 
-  <script>
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    window.addEventListener('load', () => window.scrollTo(0, 0));
-  </script>
+  <!-- ---------- WHATSAPP BUTTON ---------- -->
+  <a href="https://wa.me/6281381338233" class="whatsapp-float" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
 </body>
 </html>
