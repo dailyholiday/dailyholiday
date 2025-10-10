@@ -189,7 +189,7 @@
       width: 100%;
     }
 
-    /* Make grid responsive */
+    /* Responsive Grid */
     @media (max-width: 1024px) {
       .grid {
         grid-template-columns: repeat(2, 1fr);
@@ -262,10 +262,11 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
+    /* 📱 Smaller Instagram on Mobile */
     @media (max-width: 768px) {
       #instagram iframe {
         width: 95%;
-        height: 450px;
+        height: 350px; /* Previously 450px → half size */
       }
     }
 
@@ -468,3 +469,4 @@
   </script>
 </body>
 </html>
+
