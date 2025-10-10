@@ -9,7 +9,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome (for icons) -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
   <style>
@@ -198,7 +198,7 @@
 
     @media (max-width: 480px) {
       .grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
@@ -262,11 +262,11 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
-    /* 📱 Smaller Instagram on Mobile */
+    /* Smaller Instagram on Mobile */
     @media (max-width: 768px) {
       #instagram iframe {
         width: 95%;
-        height: 350px; /* Previously 450px → half size */
+        height: 350px;
       }
     }
 
@@ -349,48 +349,43 @@
     }
   </style>
 </head>
+
 <body id="top">
   <header>
-    <div style="display:flex;align-items:center;">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo" />
+    <div style="display: flex; align-items: center;">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo">
       <h1>Daily Holiday</h1>
     </div>
-
-    <div class="menu-toggle" id="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
     <nav>
-      <ul id="nav-links">
-        <li><a href="#top">Home</a></li>
-        <li><a href="#about">About</a></li>
+      <div class="menu-toggle" id="menu-toggle">
+        <span></span><span></span><span></span>
+      </div>
+      <ul id="menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
         <li><a href="#destinations">International</a></li>
         <li><a href="#domestic">Domestic</a></li>
-        <li><a href="#instagram">Promo</a></li>
-        <li><a href="#joinus">Join Us</a></li>
+        <li><a href="#instagram">Instagram</a></li>
+        <li><a href="#joinus">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <section id="home">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo" />
-    <p>YOUR EVERYDAY PARTNER ✈️</p>
+    <h2>Welcome to Daily Holiday</h2>
+    <p>Your Everyday Partner in Travel</p>
   </section>
 
   <section id="about">
+    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d" alt="People working together">
     <div id="about-text">
-      <h2>Slogan, Mission, and Vision of Daily Holiday</h2>
-      <p><strong>Our slogan, "Your Everyday Partner",</strong> is not just a phrase, but a representation of our mission and vision to be more than just a travel service provider. We aim to become a daily companion for both existing and future travelers, not only during holidays but also through moments that bring joy and experiences in life.</p>
-      <p><strong>• Everyday Partner</strong><br>
-      We are committed to being an inseparable part of your daily life. From casual moments to shared adventures, PT Trindo Nuansa Wisata is ready to be your trusted companion in every journey.</p>
-      <p><strong>• Beyond Holiday</strong><br>
-      Our commitment extends beyond being a travel service provider. We aspire to be a partner in all supporting aspects — from restaurants to transportation and accommodation — closely related to the tourism experience. Our <strong>mission</strong> is to change how people perceive tourism by providing services built on trust and integrity.</p>
-      <p><strong>• Vision of Daily Holiday</strong><br>
-      Our vision goes beyond conventional boundaries. We aim to not only organize trips but also become a key agent in advancing the tourism industry. Through innovation and quality service, we strive to bring joy and memorable experiences to more people.</p>
+      <h2>About Daily Holiday</h2>
+      <p><strong>Slogan, Vision and Mission of Daily Holiday</strong></p>
+      <p><em>“Your Everyday Partner”</em> is not just a phrase — it represents our mission to go beyond being just a travel service provider. We strive to be your everyday partner, whether you are our loyal client or a new traveler, bringing joy to every journey you take.</p>
+      <p><strong>Daily Partner</strong> — We are committed to being a part of your daily life. From casual trips to cherished moments with loved ones, we are here to make every experience memorable.</p>
+      <p><strong>Beyond Holiday</strong> — Our dedication goes beyond traditional travel services. We aim to be your trusted partner for all aspects related to travel — from restaurants, transport, to accommodation — ensuring quality and reliability every step of the way.</p>
+      <p><strong>Vision</strong> — To become a trusted and innovative travel partner that brings happiness and unforgettable experiences through quality service and creativity.</p>
     </div>
-    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Team Photo">
   </section>
 
   <section id="destinations">
@@ -398,75 +393,60 @@
     <div class="grid">
       <div class="destination"><img src="japan.jpg" alt="Japan"><span>Japan</span></div>
       <div class="destination"><img src="korea.jpg" alt="Korea"><span>Korea</span></div>
-      <div class="destination"><img src="china.jpg" alt="China"><span>China</span></div>
-      <div class="destination"><img src="turkey.jpg" alt="Turkey"><span>Turkey</span></div>
       <div class="destination"><img src="singapore.jpg" alt="Singapore"><span>Singapore</span></div>
       <div class="destination"><img src="thailand.jpg" alt="Thailand"><span>Thailand</span></div>
-      <div class="destination"><img src="vietnam.jpg" alt="Vietnam"><span>Vietnam</span></div>
-      <div class="destination"><img src="new zealand.jpg" alt="New Zealand"><span>New Zealand</span></div>
     </div>
   </section>
 
   <section id="domestic">
     <h2>Domestic Destinations</h2>
     <div class="grid">
-      <div class="destination"><img src="bandung.jpg" alt="Bandung"><span>Bandung</span></div>
       <div class="destination"><img src="bali.jpg" alt="Bali"><span>Bali</span></div>
-      <div class="destination"><img src="bromo.jpg" alt="Bromo"><span>Bromo</span></div>
-      <div class="destination"><img src="malang.jpg" alt="Malang"><span>Malang</span></div>
-      <div class="destination"><img src="jakarta.jpg" alt="Jakarta"><span>Jakarta</span></div>
-      <div class="destination"><img src="labuan bajo.jpg" alt="Labuan Bajo"><span>Labuan Bajo</span></div>
-      <div class="destination"><img src="wonosobo.jpg" alt="Wonosobo"><span>Wonosobo</span></div>
-      <div class="destination"><img src="dieng.jpg" alt="Dieng"><span>Dieng</span></div>
+      <div class="destination"><img src="labuanbajo.jpg" alt="Labuan Bajo"><span>Labuan Bajo</span></div>
+      <div class="destination"><img src="jogja.jpg" alt="Jogja"><span>Jogja</span></div>
+      <div class="destination"><img src="bandung.jpg" alt="Bandung"><span>Bandung</span></div>
     </div>
   </section>
 
   <section id="instagram">
     <h2>Take a look at our latest promo!</h2>
-    <iframe src="https://www.instagram.com/dailyholiday_travel/embed" allowfullscreen></iframe>
+    <iframe src="https://www.instagram.com/p/C8QbY5nvQsy/embed" allowfullscreen></iframe>
   </section>
 
   <section id="joinus">
-    <h2>Together with Daily Holiday</h2>
-    <p>
-      Plan your journey with our team of experienced travel experts.  
-      Contact us for a free consultation and get the best advice for your unforgettable travel experience.  
-      We’re ready to answer your questions and provide any information you need.
-    </p>
+    <h2>Contact Us</h2>
+    <p>Plan your journey with our experienced travel experts. Contact us for free consultation and get the best advice for an unforgettable travel experience.</p>
     <div class="contact-info">
-      <p><strong>Phone:</strong> +6281381338233</p>
-      <p><strong>Email:</strong> <a href="mailto:partners@dailyholiday.co.id" style="color:#0078FF;text-decoration:none;">partners@dailyholiday.co.id</a></p>
-      <p><strong>Address:</strong><br>Ruko Scientia Residence<br>Jl. Scientia Square Utara No.61<br>Kelapa Dua, Kab. Tangerang</p>
+      <p>Email: <a href="mailto:info@dailyholiday.co.id">info@dailyholiday.co.id</a></p>
+      <p>Phone: <a href="tel:+6281381338233">+62 813-8133-8233</a></p>
     </div>
     <div class="social-icons">
-      <a href="https://www.facebook.com/dailyholidaytour/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-      <a href="https://www.instagram.com/dailyholiday_travel/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.facebook.com/dailyholidayID" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com/dailyholidayid" target="_blank"><i class="fab fa-instagram"></i></a>
     </div>
   </section>
 
-  <footer id="contact">
-    <p>© 2025 Daily Holiday. All Rights Reserved.</p>
+  <footer>
+    <p>&copy; 2025 Daily Holiday. All Rights Reserved.</p>
   </footer>
 
-  <!-- WhatsApp Floating Button -->
-  <a href="https://wa.me/6281381338233" target="_blank" class="whatsapp-btn">
-    <i class="fa-brands fa-whatsapp"></i>
-  </a>
+  <a href="https://wa.me/6281381338233" class="whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
   <script>
-    // Prevent scroll restore
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    window.addEventListener('load', () => window.scrollTo(0, 0));
+    const toggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    const links = document.querySelectorAll('#menu a');
 
-    // Hamburger Menu Toggle
-    const menuToggle = document.getElementById('menu-toggle');
-    const navLinks = document.getElementById('nav-links');
+    toggle.addEventListener('click', () => {
+      menu.classList.toggle('show');
+    });
 
-    menuToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-      menuToggle.classList.toggle('active');
+    // Close menu when clicking a link
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('show');
+      });
     });
   </script>
 </body>
 </html>
-
