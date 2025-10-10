@@ -10,7 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
   <style>
     * {
@@ -48,11 +53,7 @@
       font-weight: 400;
     }
 
-    nav {
-      display: flex;
-      align-items: center;
-    }
-
+    /* Navbar */
     nav ul {
       list-style: none;
       display: flex;
@@ -70,44 +71,12 @@
       color: #005ed6;
     }
 
-    /* Hamburger Icon */
+    /* Hamburger */
     .menu-toggle {
       display: none;
-      flex-direction: column;
+      font-size: 26px;
+      color: #0078FF;
       cursor: pointer;
-      gap: 5px;
-    }
-
-    .menu-toggle span {
-      width: 25px;
-      height: 3px;
-      background: #0078FF;
-      transition: 0.3s;
-    }
-
-    /* Mobile Menu */
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: flex;
-      }
-
-      nav ul {
-        position: absolute;
-        top: 70px;
-        right: 0;
-        width: 100%;
-        background: white;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        padding: 20px 0;
-        border-top: 1px solid #ddd;
-        display: none;
-      }
-
-      nav ul.show {
-        display: flex;
-      }
     }
 
     section {
@@ -129,6 +98,8 @@
       width: 200px;
       border-radius: 50%;
       margin-bottom: 20px;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
     }
 
     #home p {
@@ -138,22 +109,22 @@
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
     }
 
+    /* About Section */
     #about {
+      padding: 80px 10%;
       display: flex;
       align-items: center;
+      gap: 40px;
       justify-content: center;
-      gap: 50px;
-      padding-top: 120px;
-      flex-wrap: wrap;
     }
 
     #about img {
       width: 400px;
       border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
-    #about-text {
+    #about .text {
       max-width: 600px;
     }
 
@@ -163,9 +134,16 @@
       margin-bottom: 20px;
     }
 
+    #about h3 {
+      color: #0078FF;
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
     #about p {
-      line-height: 1.6;
-      color: #555;
+      line-height: 1.7;
+      color: #444;
       margin-bottom: 10px;
     }
 
@@ -187,19 +165,6 @@
       grid-template-columns: repeat(4, 1fr);
       grid-gap: 0;
       width: 100%;
-    }
-
-    /* Responsive Grid */
-    @media (max-width: 1024px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
 
     .destination {
@@ -240,6 +205,7 @@
       opacity: 1;
     }
 
+    /* Instagram */
     #instagram {
       background: white;
       text-align: center;
@@ -262,14 +228,7 @@
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
-    /* Smaller Instagram on Mobile */
-    @media (max-width: 768px) {
-      #instagram iframe {
-        width: 95%;
-        height: 350px;
-      }
-    }
-
+    /* Join Us */
     #joinus {
       background: #f5f8ff;
       padding: 80px 10%;
@@ -311,12 +270,12 @@
       transform: scale(1.1);
     }
 
+    /* Footer */
     footer {
       background: #0078FF;
       color: white;
       text-align: center;
       padding: 40px 10px;
-      margin-top: 0;
     }
 
     footer p {
@@ -324,11 +283,11 @@
     }
 
     /* WhatsApp Button */
-    .whatsapp-btn {
+    .whatsapp-button {
       position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background-color: #25D366;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
       color: white;
       border-radius: 50%;
       width: 60px;
@@ -336,55 +295,95 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
-      z-index: 2000;
+      font-size: 30px;
       text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: 0.3s;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
 
-    .whatsapp-btn:hover {
-      background-color: #1ebe57;
-      transform: scale(1.1);
+    .whatsapp-button:hover {
+      background-color: #1ebe5d;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-wrap: wrap;
+        padding: 15px 25px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background: white;
+        padding: 10px 0;
+      }
+
+      nav ul.show {
+        display: flex;
+      }
+
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      #about {
+        flex-direction: column;
+      }
+
+      #about img {
+        width: 90%;
+      }
+
+      #instagram iframe {
+        width: 90%;
+        height: 350px;
+      }
     }
   </style>
 </head>
 
 <body id="top">
   <header>
-    <div style="display: flex; align-items: center;">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo">
+    <div style="display:flex;align-items:center;">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo" />
       <h1>Daily Holiday</h1>
     </div>
+    <div class="menu-toggle" id="menu-toggle"><i class="fa-solid fa-bars"></i></div>
     <nav>
-      <div class="menu-toggle" id="menu-toggle">
-        <span></span><span></span><span></span>
-      </div>
       <ul id="menu">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Us</a></li>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#about">About</a></li>
         <li><a href="#destinations">International</a></li>
         <li><a href="#domestic">Domestic</a></li>
-        <li><a href="#instagram">Instagram</a></li>
-        <li><a href="#joinus">Contact</a></li>
+        <li><a href="#instagram">Promo</a></li>
+        <li><a href="#joinus">Join Us</a></li>
       </ul>
     </nav>
   </header>
 
   <section id="home">
-    <h2>Welcome to Daily Holiday</h2>
-    <p>Your Everyday Partner in Travel</p>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo" />
+    <p>YOUR EVERYDAY PARTNER ✈️</p>
   </section>
 
   <section id="about">
-    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d" alt="People working together">
-    <div id="about-text">
-      <h2>About Daily Holiday</h2>
-      <p><strong>Slogan, Vision and Mission of Daily Holiday</strong></p>
-      <p><em>“Your Everyday Partner”</em> is not just a phrase — it represents our mission to go beyond being just a travel service provider. We strive to be your everyday partner, whether you are our loyal client or a new traveler, bringing joy to every journey you take.</p>
-      <p><strong>Daily Partner</strong> — We are committed to being a part of your daily life. From casual trips to cherished moments with loved ones, we are here to make every experience memorable.</p>
-      <p><strong>Beyond Holiday</strong> — Our dedication goes beyond traditional travel services. We aim to be your trusted partner for all aspects related to travel — from restaurants, transport, to accommodation — ensuring quality and reliability every step of the way.</p>
-      <p><strong>Vision</strong> — To become a trusted and innovative travel partner that brings happiness and unforgettable experiences through quality service and creativity.</p>
+    <img src="founders_dailyholiday.jpg" alt="Founders of Daily Holiday">
+    <div class="text">
+      <h2>Slogan, Mission, and Vision of Daily Holiday</h2>
+      <p>Our slogan, <strong><em>“Your Everyday Partner”</em></strong>, is more than just words — it represents our vision and mission to be more than a mere travel service provider. We are dedicated to being a daily partner for both our customers and future travelers, not only during holidays but also in every meaningful moment filled with joy and experiences.</p>
+      <h3>• Everyday Partner</h3>
+      <p>We are committed to being an inseparable part of your daily life. From relaxing moments to special occasions, PT Trindo Nuansa Wisata aims to be your trusted companion throughout every journey you take.</p>
+      <h3>• Beyond Holiday</h3>
+      <p>Our commitment extends far beyond being just a travel agency. We aspire to become a trusted partner in every supporting aspect — from restaurants and transportation to accommodations — all closely tied to tourism. Whether you’re planning a new trip or simply a daily escape, PT Trindo Nuansa Wisata is ready to provide the best service possible.</p>
+      <h3>• Vision of Daily Holiday</h3>
+      <p>Our vision goes beyond conventional limits. We aim not only to be a travel organizer but also an agent of growth that drives progress in the tourism industry. Through innovation and high-quality service, we strive to deliver joyful travel experiences and bring happiness to even more people.</p>
     </div>
   </section>
 
@@ -393,44 +392,58 @@
     <div class="grid">
       <div class="destination"><img src="japan.jpg" alt="Japan"><span>Japan</span></div>
       <div class="destination"><img src="korea.jpg" alt="Korea"><span>Korea</span></div>
+      <div class="destination"><img src="china.jpg" alt="China"><span>China</span></div>
+      <div class="destination"><img src="turkey.jpg" alt="Turkey"><span>Turkey</span></div>
       <div class="destination"><img src="singapore.jpg" alt="Singapore"><span>Singapore</span></div>
       <div class="destination"><img src="thailand.jpg" alt="Thailand"><span>Thailand</span></div>
+      <div class="destination"><img src="vietnam.jpg" alt="Vietnam"><span>Vietnam</span></div>
+      <div class="destination"><img src="new zealand.jpg" alt="New Zealand"><span>New Zealand</span></div>
     </div>
   </section>
 
   <section id="domestic">
     <h2>Domestic Destinations</h2>
     <div class="grid">
-      <div class="destination"><img src="bali.jpg" alt="Bali"><span>Bali</span></div>
-      <div class="destination"><img src="labuanbajo.jpg" alt="Labuan Bajo"><span>Labuan Bajo</span></div>
-      <div class="destination"><img src="jogja.jpg" alt="Jogja"><span>Jogja</span></div>
       <div class="destination"><img src="bandung.jpg" alt="Bandung"><span>Bandung</span></div>
+      <div class="destination"><img src="bali.jpg" alt="Bali"><span>Bali</span></div>
+      <div class="destination"><img src="bromo.jpg" alt="Bromo"><span>Bromo</span></div>
+      <div class="destination"><img src="malang.jpg" alt="Malang"><span>Malang</span></div>
+      <div class="destination"><img src="jakarta.jpg" alt="Jakarta"><span>Jakarta</span></div>
+      <div class="destination"><img src="labuan bajo.jpg" alt="Labuan Bajo"><span>Labuan Bajo</span></div>
+      <div class="destination"><img src="wonosobo.jpg" alt="Wonosobo"><span>Wonosobo</span></div>
+      <div class="destination"><img src="dieng.jpg" alt="Dieng"><span>Dieng</span></div>
     </div>
   </section>
 
   <section id="instagram">
     <h2>Take a look at our latest promo!</h2>
-    <iframe src="https://www.instagram.com/p/C8QbY5nvQsy/embed" allowfullscreen></iframe>
+    <iframe src="https://www.instagram.com/dailyholiday_travel/embed" allowfullscreen></iframe>
   </section>
 
   <section id="joinus">
-    <h2>Contact Us</h2>
-    <p>Plan your journey with our experienced travel experts. Contact us for free consultation and get the best advice for an unforgettable travel experience.</p>
+    <h2>Join the Daily Holiday Experience!</h2>
+    <p>
+      Partner with Daily Holiday to access exclusive travel deals, seamless trip planning, and unforgettable journeys.
+      Let’s make your travel dreams come true — together!
+    </p>
     <div class="contact-info">
-      <p>Email: <a href="mailto:info@dailyholiday.co.id">info@dailyholiday.co.id</a></p>
-      <p>Phone: <a href="tel:+6281381338233">+62 813-8133-8233</a></p>
+      <p><strong>Phone:</strong> +6281381338233</p>
+      <p><strong>Email:</strong> <a href="mailto:partners@dailyholiday.co.id" style="color:#0078FF;text-decoration:none;">partners@dailyholiday.co.id</a></p>
+      <p><strong>Address:</strong><br>Ruko Scientia Residence<br>Jl. Scientia Square Utara No.61<br>Kelapa Dua, Kab. Tangerang</p>
     </div>
     <div class="social-icons">
-      <a href="https://www.facebook.com/dailyholidayID" target="_blank"><i class="fab fa-facebook"></i></a>
-      <a href="https://www.instagram.com/dailyholidayid" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.facebook.com/dailyholidaytour/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/dailyholiday_travel/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 Daily Holiday. All Rights Reserved.</p>
+    <p>© 2025 Daily Holiday. All Rights Reserved.</p>
   </footer>
 
-  <a href="https://wa.me/6281381338233" class="whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://wa.me/6281381338233" class="whatsapp-button" target="_blank">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
 
   <script>
     const toggle = document.getElementById('menu-toggle');
@@ -441,7 +454,7 @@
       menu.classList.toggle('show');
     });
 
-    // Close menu when clicking a link
+    // ✅ Close mobile menu when link clicked
     links.forEach(link => {
       link.addEventListener('click', () => {
         menu.classList.remove('show');
