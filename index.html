@@ -82,8 +82,8 @@
         background: white;
         flex-direction: column;
         width: 100%;
-        text-align: right;
-        padding: 10px 30px;
+        text-align: center; /* <-- centered links */
+        padding: 20px 0;
       }
 
       nav ul.show {
@@ -143,7 +143,8 @@
       font-size: 32px;
       color: #0078FF;
       margin-bottom: 20px;
-      text-align: left;
+      text-align: center; /* <-- centered title */
+      width: 100%;
     }
 
     #about p {
@@ -350,25 +351,25 @@
   </section>
 
   <section id="about">
-    <div>
-      <h2>About Us</h2>
+    <h2>Slogan, Mission, and Vision of Daily Holiday</h2>
+    <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:40px;">
       <p>
-        <strong>Slogan, Mission and Vision of Daily Holiday</strong><br><br>
         Our slogan, <em>"Your Everyday Partner"</em>, is not just a phrase but a representation of our vision and mission to be more than just a travel service provider. We strive to become a daily partner for our customers, not only during holidays but in every joyful moment of life.
         <br><br>
         <strong>• Daily Partner</strong><br>
         We are committed to being an inseparable part of your daily life. From relaxing moments to shared adventures, PT Trindo Nuansa Wisata is here to be a consistent companion on your travel journey.
         <br><br>
         <strong>• Beyond Holiday</strong><br>
-        Our commitment goes beyond being a travel agency. We aim to be your trusted partner across all aspects of tourism — from hospitality and transportation to accommodation — always maintaining the highest service standards. Our mission is to change perceptions about tourism by delivering honest, trustworthy, and high-quality travel experiences.
+        Our commitment goes beyond being a travel agency. We aim to be your trusted partner across all aspects of tourism — from hospitality and transportation to accommodation — always maintaining the highest service standards.
         <br><br>
         <strong>• Daily Holiday Vision</strong><br>
         Our vision goes beyond limits. We aspire to not only be a travel provider but a driving force in advancing the tourism sector through innovation and exceptional service, bringing happiness to many.
       </p>
+      <img src="founders.png" alt="Founders of Daily Holiday">
     </div>
-    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Team Image">
   </section>
 
+  <!-- Rest of your site stays the same -->
   <section id="destinations">
     <h2>International Destinations</h2>
     <div class="grid">
@@ -405,7 +406,7 @@
   <section id="joinus">
     <h2>Join the Daily Holiday Experience!</h2>
     <p>
-      Plan your journey with our experienced travel experts. Contact us for free consultation and get the best advice for your unforgettable travel experiences. We're ready to answer your questions and provide the information you need.
+      Plan your journey with our experienced travel experts. Contact us for free consultation and get the best advice for your unforgettable travel experiences.
     </p>
     <div class="contact-info">
       <p><strong>Phone:</strong> +6281381338233</p>
@@ -422,12 +423,10 @@
     <p>© 2025 Daily Holiday. All Rights Reserved.</p>
   </footer>
 
-  <!-- WhatsApp Button -->
   <a href="https://wa.me/6281381338233" class="whatsapp-btn" target="_blank">
     <i class="fab fa-whatsapp"></i>
   </a>
 
-  <!-- Hamburger Menu Script -->
   <script>
     const toggle = document.getElementById('menu-toggle');
     const menu = document.getElementById('menu');
