@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Daily Holiday</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" type="image/png">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
   <style>
     body {
       margin: 0;
@@ -26,11 +30,18 @@
     }
 
     nav .logo {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      color: #0078FF;
+      display: flex;
+      align-items: center;
       text-decoration: none;
+      color: #0078FF;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    nav .logo img {
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 10px;
     }
 
     nav ul {
@@ -61,55 +72,60 @@
     }
 
     #hero img {
-      width: 280px;
-      height: auto;
-      filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
+      width: 200px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
     }
 
     /* ---------- ABOUT US ---------- */
     #about {
-      padding: 60px 20px;
-      text-align: left;
-      max-width: 900px;
-      margin: 0 auto;
-      line-height: 1.7;
-      color: #333;
-    }
-
-    .about-logo {
       display: flex;
+      flex-wrap: wrap;
+      align-items: center;
       justify-content: center;
-      margin-bottom: 25px;
+      gap: 40px;
+      padding: 80px 10%;
+      background: #f9f9f9;
     }
 
-    .about-logo img {
-      width: 180px;
-      height: auto;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    #about-text {
+      flex: 1;
+      min-width: 300px;
+      max-width: 600px;
     }
 
-    #about h2 {
-      font-size: 32px;
+    #about-text h2 {
       color: #0078FF;
-      text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+      font-size: 32px;
       font-weight: 600;
     }
 
-    #about h3 {
+    #about-text h3 {
       color: #0078FF;
       margin-top: 20px;
       font-size: 20px;
       font-weight: 600;
     }
 
-    #about p {
-      font-size: 1.05rem;
-      margin-bottom: 15px;
+    #about-text p {
       color: #444;
+      line-height: 1.6;
+      font-size: 1rem;
+      margin-bottom: 10px;
     }
 
-    /* ---------- INTERNATIONAL & DOMESTIC ---------- */
+    #about img {
+      flex: 1;
+      min-width: 300px;
+      max-width: 450px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      object-fit: cover;
+    }
+
+    /* ---------- DESTINATIONS ---------- */
     .destination-section {
       padding: 60px 0;
       text-align: center;
@@ -167,7 +183,7 @@
     #instagram {
       text-align: center;
       padding: 60px 0;
-      background-color: #f8f8f8;
+      background-color: #ffffff;
     }
 
     #instagram h2 {
@@ -182,7 +198,6 @@
       border-radius: 10px;
       overflow-y: scroll;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      max-width: 800px;
     }
 
     @media (max-width: 768px) {
@@ -268,14 +283,16 @@
     .whatsapp-float:hover {
       background-color: #1ebd5a;
     }
-
   </style>
 </head>
 <body>
 
   <!-- ---------- NAVBAR ---------- -->
   <nav>
-    <a href="#hero" class="logo">Daily Holiday</a>
+    <a href="#hero" class="logo">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo">
+      Daily Holiday
+    </a>
     <ul>
       <li><a href="#about">About Us</a></li>
       <li><a href="#international">International</a></li>
@@ -287,54 +304,30 @@
 
   <!-- ---------- HERO SECTION ---------- -->
   <section id="hero">
-    <img src="logo.png" alt="Daily Holiday Logo">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo">
   </section>
 
   <!-- ---------- ABOUT US ---------- -->
   <section id="about">
-    <div class="about-logo">
-      <img src="logo.png" alt="Daily Holiday Logo">
+    <div id="about-text">
+      <h2>Slogan, Mission, and Vision of Daily Holiday</h2>
+
+      <p><strong>“Your Everyday Partner”</strong> represents our mission to be more than a travel service provider — we aim to be your trusted companion for every memorable journey, creating experiences filled with joy and meaning.</p>
+
+      <h3>• Everyday Partner</h3>
+      <p>We are committed to being an inseparable part of your daily life. From relaxing moments to special occasions, PT Trindo Nuansa Wisata is your trusted travel companion in every journey.</p>
+
+      <h3>• Beyond Holiday</h3>
+      <p>We go beyond being a travel agency. We aspire to be a reliable partner in all aspects of tourism — from dining and transportation to accommodation — ensuring quality and integrity in every service.</p>
+
+      <h3>• Vision of Daily Holiday</h3>
+      <p>We aim to be not just a travel organizer, but a growth agent in the tourism industry — delivering joy through innovation, excellent service, and unforgettable travel experiences.</p>
     </div>
 
-    <h2>Slogan, Mission, and Vision of Daily Holiday</h2>
-
-    <p>
-      Our slogan, <strong><em>“Your Everyday Partner”</em></strong>, is more than just words — 
-      it represents our vision and mission to be more than a mere travel service provider.  
-      We are dedicated to being a daily partner for both our customers and future travelers,  
-      not only during holidays but also in every meaningful moment filled with joy and experiences.
-    </p>
-
-    <h3>• Everyday Partner</h3>
-    <p>
-      We are committed to being an inseparable part of your daily life.  
-      From relaxing moments to special occasions, PT Trindo Nuansa Wisata  
-      aims to be your trusted companion throughout every journey you take.
-    </p>
-
-    <h3>• Beyond Holiday</h3>
-    <p>
-      Our commitment extends far beyond being just a travel agency.  
-      We aspire to become a trusted partner in every supporting aspect —  
-      from restaurants and transportation to accommodations — all closely tied to tourism.  
-      Whether you’re planning a new trip or simply a daily escape,  
-      PT Trindo Nuansa Wisata is ready to provide the best service possible.  
-      Our main mission is to reshape public perception of tourism  
-      by offering trusted and integrity-driven travel services.
-    </p>
-
-    <h3>• Vision of Daily Holiday</h3>
-    <p>
-      Our vision goes beyond conventional limits.  
-      We aim not only to be a travel organizer but also an agent of growth  
-      that drives progress in the tourism industry.  
-      Through innovation and high-quality service,  
-      we strive to deliver joyful travel experiences  
-      and bring happiness to even more people.
-    </p>
+    <img src="aboutus.jpg" alt="People traveling together">
   </section>
 
-  <!-- ---------- INTERNATIONAL SECTION ---------- -->
+  <!-- ---------- INTERNATIONAL DESTINATIONS ---------- -->
   <section id="international" class="destination-section">
     <h2>International Destinations</h2>
     <div class="destination-gallery">
@@ -349,7 +342,7 @@
     </div>
   </section>
 
-  <!-- ---------- DOMESTIC SECTION ---------- -->
+  <!-- ---------- DOMESTIC DESTINATIONS ---------- -->
   <section id="domestic" class="destination-section">
     <h2>Domestic Destinations</h2>
     <div class="destination-gallery">
@@ -367,39 +360,23 @@
   <!-- ---------- INSTAGRAM ---------- -->
   <section id="instagram">
     <h2>Take a look at our latest promo!</h2>
-    <iframe src="https://snapwidget.com/embed/yourwidgetlink"></iframe>
+    <iframe src="https://www.instagram.com/dailyholiday_travel/embed" allowfullscreen></iframe>
   </section>
 
   <!-- ---------- JOIN US ---------- -->
   <section id="joinus">
     <h2>Together with Daily Holiday</h2>
-    <p>
-      Plan your journey with our team of experienced travel experts.  
-      Contact us for a free consultation and get the best advice for your unforgettable travel experience.  
-      We’re ready to answer your questions and provide any information you need.
-    </p>
+    <p>Plan your journey with our experienced team. Contact us for a free consultation and create unforgettable experiences together!</p>
 
     <div class="contact-info">
       <p><strong>Phone:</strong> +6281381338233</p>
-      <p><strong>Email:</strong>
-        <a href="mailto:partners@dailyholiday.co.id" style="color:#0078FF;text-decoration:none;">
-          partners@dailyholiday.co.id
-        </a>
-      </p>
-      <p><strong>Address:</strong><br>
-        Ruko Scientia Residence<br>
-        Jl. Scientia Square Utara No.61<br>
-        Kelapa Dua, Kab. Tangerang
-      </p>
+      <p><strong>Email:</strong> <a href="mailto:partners@dailyholiday.co.id" style="color:#0078FF;text-decoration:none;">partners@dailyholiday.co.id</a></p>
+      <p><strong>Address:</strong><br>Ruko Scientia Residence<br>Jl. Scientia Square Utara No.61<br>Kelapa Dua, Kab. Tangerang</p>
     </div>
 
     <div class="social-icons">
-      <a href="https://www.facebook.com/dailyholidaytour/" target="_blank">
-        <i class="fa-brands fa-facebook"></i>
-      </a>
-      <a href="https://www.instagram.com/dailyholiday_travel/" target="_blank">
-        <i class="fa-brands fa-instagram"></i>
-      </a>
+      <a href="https://www.facebook.com/dailyholidaytour/" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://www.instagram.com/dailyholiday_travel/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
     </div>
   </section>
 
