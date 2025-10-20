@@ -507,8 +507,66 @@
       });
     });
   </script>
+  
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBS7C50eMiRtQ4nge4HrXo0ZuEkKoIVIUE",
+      authDomain: "daily-holiday.firebaseapp.com",
+      projectId: "daily-holiday",
+      storageBucket: "daily-holiday.firebasestorage.app",
+      messagingSenderId: "51054604621",
+      appId: "1:51054604621:web:deffcd35458bb7c6b18704",
+      measurementId: "G-SX1PV7VLSX"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getFirestore, collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBS7C50eMiRtQ4nge4HrXo0ZuEkKoIVIUE",
+      authDomain: "daily-holiday.firebaseapp.com",
+      projectId: "daily-holiday",
+      storageBucket: "daily-holiday.firebasestorage.app",
+      messagingSenderId: "51054604621",
+      appId: "1:51054604621:web:deffcd35458bb7c6b18704",
+      measurementId: "G-SX1PV7VLSX"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadArticles() {
+      const articlesRef = collection(db, "articles");
+      const q = query(articlesRef, orderBy("createdAt", "desc"), limit(3));
+      const querySnapshot = await getDocs(q);
+      const container = document.getElementById("articles-container");
+
+      container.innerHTML = "";
+      querySnapshot.forEach((doc) => {
+        const article = doc.data();
+        container.innerHTML += `
+          <div class="article-card">
+            <img src="${article.imageURL}" alt="${article.title}">
+            <h3>${article.title}</h3>
+            <p>${article.summary}</p>
+          </div>
+        `;
+      });
+    }
+
+    loadArticles();
+  </script>
 </body>
 </html>
+
 
 
 
