@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Holiday Admin</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f5f5f5;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Admin Login</h2>
+  <div id="login-section">
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button id="login-btn">Login</button>
+  </div>
+
+  <div id="form-section" style="display:none;">
+    <h2>Add New Article</h2>
+    <form id="articleForm">
+      <input type="text" id="title" placeholder="Article Title" required>
+      <textarea id="summary" placeholder="Short Summary" required></textarea>
+      <input type="text" id="imageURL" placeholder="Image URL" required>
+      <button type="submit">Add Article</button>
+    </form>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBS7C50eMiRtQ4nge4HrXo0ZuEkKoIVIUE",
+      authDomain: "daily-holiday.firebaseapp.com",
+      projectId: "daily-holiday",
+      storageBucket: "daily-holiday.firebasestorage.app",
+      messagingSenderId: "51054604621",
+      appId: "1:51054604621:web:deffcd35458bb7c6b18704",
+      measurementId: "G-SX1PV7VLSX"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    document.getElementById("login-btn").addEventListener("click", async () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        document.getElementById("login-section").style.display = "none";
+        document.getElementById("form-section").style.display = "block";
+      } catch (error) {
+        alert("Login failed: " + error.message);
+      }
+    });
+
+    document.getElementById("articleForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const title = document.getElementById("title").value;
+      const summary = document.getElementById("summary").value;
+      const imageURL = document.getElementById("imageURL").value;
+
+      await addDoc(collection(db, "articles"), {
+        title,
+        summary,
+        imageURL,
+        createdAt: serverTimestamp(),
+      });
+
+      alert("✅ Article added successfully!");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
