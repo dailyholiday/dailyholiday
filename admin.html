@@ -30,7 +30,7 @@
       border-radius: 16px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       width: 100%;
-      max-width: 550px;
+      max-width: 500px;
     }
 
     h1 {
@@ -102,6 +102,14 @@
       text-align: center;
     }
 
+    .login-container {
+      text-align: center;
+    }
+
+    .login-container input {
+      margin-bottom: 15px;
+    }
+
     .logout-btn {
       display: block;
       background: #ff4b4b;
@@ -111,75 +119,13 @@
     .logout-btn:hover {
       background: #d63a3a;
     }
-
-    .progress-bar {
-      width: 100%;
-      height: 8px;
-      background: #ddd;
-      border-radius: 5px;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-
-    .progress {
-      height: 100%;
-      width: 0;
-      background: #0078ff;
-      transition: width 0.3s;
-    }
-
-    /* === Preview Section === */
-    #preview {
-      margin-top: 40px;
-      padding: 20px;
-      border: 2px dashed #0078ff;
-      border-radius: 12px;
-      background: #f9fbff;
-    }
-
-    #preview h3 {
-      text-align: center;
-      color: #0078ff;
-      margin-bottom: 15px;
-      font-size: 20px;
-    }
-
-    #preview img {
-      display: block;
-      width: 100%;
-      max-height: 250px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    #preview h4 {
-      font-size: 18px;
-      color: #222;
-      margin-bottom: 8px;
-      text-align: center;
-    }
-
-    #preview p {
-      color: #555;
-      font-size: 15px;
-      text-align: center;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 25px;
-      }
-    }
   </style>
 </head>
 
 <body>
-  <!-- Login Section -->
   <div class="container" id="login-section">
     <h1><i class="fa-solid fa-lock"></i> Admin Login</h1>
-    <div>
+    <div class="login-container">
       <input type="email" id="email" placeholder="Email" />
       <input type="password" id="password" placeholder="Password" />
       <button id="loginBtn">Login</button>
@@ -187,7 +133,6 @@
     </div>
   </div>
 
-  <!-- Admin Section -->
   <div class="container" id="admin-section" style="display:none;">
     <h1><i class="fa-solid fa-newspaper"></i> Add New Article</h1>
     <form id="articleForm">
@@ -200,34 +145,19 @@
         <textarea id="summary" required></textarea>
       </div>
       <div class="form-group">
-        <label for="imageUrl">Image URL</label>
-        <input type="url" id="imageUrl" placeholder="Paste image link (supports Google Drive links)" />
-        <small style="color: gray;">
-        Example: https://drive.google.com/file/d/FILE_ID/view <br>
-        Supports Google Drive & direct image links.
-        </small>
+        <label for="imageURL">Image URL</label>
+        <input type="url" id="imageURL" required />
       </div>
       <button type="submit">Publish Article</button>
       <p class="success" id="successMsg"></p>
     </form>
-
-    <!-- 🔹 Live Preview -->
-    <div id="preview">
-      <h3>Live Preview</h3>
-      <img id="previewImage" src="" alt="Preview Image" style="display:none;">
-      <h4 id="previewTitle">Your title will appear here</h4>
-      <p id="previewSummary">Your summary will appear here...</p>
-    </div>
-
     <button class="logout-btn" id="logoutBtn">Logout</button>
   </div>
 
-  <!-- Firebase Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
     import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-    import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBS7C50eMiRtQ4nge4HrXo0ZuEkKoIVIUE",
@@ -242,30 +172,14 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
-    const storage = getStorage(app);
 
     const loginSection = document.getElementById("login-section");
     const adminSection = document.getElementById("admin-section");
+
     const loginBtn = document.getElementById("loginBtn");
     const logoutBtn = document.getElementById("logoutBtn");
     const loginError = document.getElementById("loginError");
     const successMsg = document.getElementById("successMsg");
-    const progressBar = document.getElementById("uploadProgress");
-
-    const previewImage = document.getElementById("previewImage");
-    const previewTitle = document.getElementById("previewTitle");
-    const previewSummary = document.getElementById("previewSummary");
-
-    let uploadedImageURL = "";
-
-    // Live text preview
-    document.getElementById("title").addEventListener("input", (e) => {
-      previewTitle.textContent = e.target.value || "Your title will appear here";
-    });
-
-    document.getElementById("summary").addEventListener("input", (e) => {
-      previewSummary.textContent = e.target.value || "Your summary will appear here...";
-    });
 
     // Login
     loginBtn.addEventListener("click", async () => {
@@ -274,7 +188,7 @@
       try {
         await signInWithEmailAndPassword(auth, email, password);
         loginError.textContent = "";
-      } catch {
+      } catch (error) {
         loginError.textContent = "Invalid login credentials!";
       }
     });
@@ -284,81 +198,35 @@
       await signOut(auth);
     });
 
-    // Auth State
+    // Auth state change
     onAuthStateChanged(auth, (user) => {
-      loginSection.style.display = user ? "none" : "block";
-      adminSection.style.display = user ? "block" : "none";
-    });
-
-    // Image Upload + Preview
-    document.getElementById("imageUrl").addEventListener("input", (e) => {
-      const url = e.target.value.trim();
-      if (!url) return;
-    
-      let finalUrl = url;
-    
-      // 🧠 Handle Google Drive links
-      const driveMatch = url.match(/\/d\/(.*?)\//);
-      if (driveMatch && driveMatch[1]) {
-        finalUrl = `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+      if (user) {
+        loginSection.style.display = "none";
+        adminSection.style.display = "block";
+      } else {
+        loginSection.style.display = "block";
+        adminSection.style.display = "none";
       }
-    
-      previewImage.src = finalUrl;
-      previewImage.style.display = "block";
-      uploadedImageURL = finalUrl; // same variable used for article publishing
-    });
-    
-      const compressedBlob = await compressImage(file);
-      const compressedFile = new File([compressedBlob], file.name, { type: "image/jpeg" });
-    
-      // Upload to Firebase Storage
-      const storageRef = ref(storage, "articles/" + compressedFile.name);
-      const uploadTask = uploadBytesResumable(storageRef, compressedFile);
-    
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          progressBar.style.width = progress + "%";
-        },
-        (error) => {
-          alert("❌ Upload failed: " + error.message);
-        },
-        async () => {
-          uploadedImageURL = await getDownloadURL(uploadTask.snapshot.ref);
-          progressBar.style.width = "100%";
-          console.log("✅ Image uploaded:", uploadedImageURL);
-        }
-      );
     });
 
-    // Submit Article
+    // Submit article
     document.getElementById("articleForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const title = document.getElementById("title").value;
       const summary = document.getElementById("summary").value;
-
-      if (!uploadedImageURL) {
-        alert("Please enter a valid image link.");
-        return;
-      }
+      const imageURL = document.getElementById("imageURL").value;
 
       try {
         await addDoc(collection(db, "articles"), {
           title,
           summary,
-          imageURL: uploadedImageURL,
-          createdAt: serverTimestamp(),
+          imageURL,
+          createdAt: serverTimestamp()
         });
         successMsg.textContent = "✅ Article published successfully!";
         e.target.reset();
-        uploadedImageURL = "";
-        progressBar.style.width = "0%";
-        previewImage.style.display = "none";
-        previewTitle.textContent = "Your title will appear here";
-        previewSummary.textContent = "Your summary will appear here...";
         setTimeout(() => (successMsg.textContent = ""), 3000);
-      } catch {
+      } catch (error) {
         successMsg.textContent = "❌ Error publishing article!";
       }
     });
