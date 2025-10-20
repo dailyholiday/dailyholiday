@@ -102,14 +102,6 @@
       text-align: center;
     }
 
-    .login-container {
-      text-align: center;
-    }
-
-    .login-container input {
-      margin-bottom: 15px;
-    }
-
     .logout-btn {
       display: block;
       background: #ff4b4b;
@@ -119,13 +111,30 @@
     .logout-btn:hover {
       background: #d63a3a;
     }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress {
+      height: 100%;
+      width: 0;
+      background: #0078ff;
+      transition: width 0.3s;
+    }
   </style>
 </head>
 
 <body>
+  <!-- Login Section -->
   <div class="container" id="login-section">
     <h1><i class="fa-solid fa-lock"></i> Admin Login</h1>
-    <div class="login-container">
+    <div>
       <input type="email" id="email" placeholder="Email" />
       <input type="password" id="password" placeholder="Password" />
       <button id="loginBtn">Login</button>
@@ -133,6 +142,7 @@
     </div>
   </div>
 
+  <!-- Admin Panel -->
   <div class="container" id="admin-section" style="display:none;">
     <h1><i class="fa-solid fa-newspaper"></i> Add New Article</h1>
     <form id="articleForm">
@@ -145,8 +155,9 @@
         <textarea id="summary" required></textarea>
       </div>
       <div class="form-group">
-        <label for="imageURL">Image URL</label>
-        <input type="url" id="imageURL" required />
+        <label for="imageFile">Upload Image</label>
+        <input type="file" id="imageFile" accept="image/*" required />
+        <div class="progress-bar"><div class="progress" id="uploadProgress"></div></div>
       </div>
       <button type="submit">Publish Article</button>
       <p class="success" id="successMsg"></p>
@@ -154,10 +165,12 @@
     <button class="logout-btn" id="logoutBtn">Logout</button>
   </div>
 
+  <!-- Firebase Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
     import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
     import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBS7C50eMiRtQ4nge4HrXo0ZuEkKoIVIUE",
@@ -172,14 +185,17 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
+    const storage = getStorage(app);
 
     const loginSection = document.getElementById("login-section");
     const adminSection = document.getElementById("admin-section");
-
     const loginBtn = document.getElementById("loginBtn");
     const logoutBtn = document.getElementById("logoutBtn");
     const loginError = document.getElementById("loginError");
     const successMsg = document.getElementById("successMsg");
+    const progressBar = document.getElementById("uploadProgress");
+
+    let uploadedImageURL = "";
 
     // Login
     loginBtn.addEventListener("click", async () => {
@@ -209,22 +225,49 @@
       }
     });
 
+    // Upload image
+    document.getElementById("imageFile").addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const storageRef = ref(storage, "articles/" + file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on("state_changed",
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          progressBar.style.width = progress + "%";
+        },
+        (error) => alert("Upload failed!"),
+        async () => {
+          uploadedImageURL = await getDownloadURL(uploadTask.snapshot.ref);
+          progressBar.style.width = "100%";
+        }
+      );
+    });
+
     // Submit article
     document.getElementById("articleForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const title = document.getElementById("title").value;
       const summary = document.getElementById("summary").value;
-      const imageURL = document.getElementById("imageURL").value;
+
+      if (!uploadedImageURL) {
+        alert("Please wait until the image upload finishes.");
+        return;
+      }
 
       try {
         await addDoc(collection(db, "articles"), {
           title,
           summary,
-          imageURL,
-          createdAt: serverTimestamp()
+          imageURL: uploadedImageURL,
+          createdAt: serverTimestamp(),
         });
         successMsg.textContent = "✅ Article published successfully!";
         e.target.reset();
+        uploadedImageURL = "";
+        progressBar.style.width = "0%";
         setTimeout(() => (successMsg.textContent = ""), 3000);
       } catch (error) {
         successMsg.textContent = "❌ Error publishing article!";
