@@ -3,228 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel | Daily Holiday</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+  <title>Admin Panel - Daily Holiday</title>
+
+  <!-- Quill CSS (Rich Text Editor) -->
+  <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
+
   <style>
-    * {
-      box-sizing: border-box;
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f6f9;
       margin: 0;
       padding: 0;
-      font-family: "Poppins", sans-serif;
     }
-
-    body {
-      background: #f4f6fc;
-      color: #333;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 30px;
-    }
-
     .container {
-      background: white;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 550px;
-    }
-
-    h1 {
-      color: #0078ff;
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 26px;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    label {
-      font-weight: 500;
-      display: block;
-      margin-bottom: 8px;
-      color: #444;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 15px;
-      outline: none;
-      transition: 0.3s;
-    }
-
-    input:focus, textarea:focus {
-      border-color: #0078ff;
-      box-shadow: 0 0 0 2px rgba(0, 120, 255, 0.2);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    button {
-      background: #0078ff;
-      color: white;
-      border: none;
-      width: 100%;
-      padding: 14px;
+      max-width: 1000px;
+      margin: 40px auto;
+      background: #fff;
       border-radius: 10px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 16px;
-      transition: 0.3s;
+      padding: 30px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
     }
-
-    button:hover {
-      background: #005ed6;
-    }
-
-    .success {
-      color: green;
-      font-weight: 500;
-      margin-top: 15px;
+    h1 {
       text-align: center;
+      color: #0078FF;
+      margin-bottom: 20px;
     }
-
-    .error {
-      color: red;
-      font-weight: 500;
-      margin-top: 15px;
-      text-align: center;
+    h2 {
+      color: #0078FF;
+      border-bottom: 2px solid #0078FF;
+      padding-bottom: 5px;
+      margin-top: 40px;
     }
-
-    .logout-btn {
+    label {
       display: block;
-      background: #ff4b4b;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #333;
+    }
+    input[type="text"],
+    textarea,
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      background: #0078FF;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 5px;
+    }
+    button:hover {
+      background: #005dc5;
+    }
+    .danger {
+      background: #e74c3c;
+    }
+    .danger:hover {
+      background: #c0392b;
+    }
+    #preview {
+      border: 2px dashed #0078FF;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 30px;
+      background: #f8faff;
+    }
+    #preview img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+    .article-list {
       margin-top: 20px;
     }
-
-    .logout-btn:hover {
-      background: #d63a3a;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 8px;
-      background: #ddd;
-      border-radius: 5px;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-
-    .progress {
-      height: 100%;
-      width: 0;
-      background: #0078ff;
-      transition: width 0.3s;
-    }
-
-    /* === Preview Section === */
-    #preview {
-      margin-top: 40px;
-      padding: 20px;
-      border: 2px dashed #0078ff;
-      border-radius: 12px;
-      background: #f9fbff;
-    }
-
-    #preview h3 {
-      text-align: center;
-      color: #0078ff;
-      margin-bottom: 15px;
-      font-size: 20px;
-    }
-
-    #preview img {
-      display: block;
-      width: 100%;
-      max-height: 250px;
-      object-fit: cover;
+    .article-card {
+      border: 1px solid #ccc;
       border-radius: 10px;
+      padding: 15px;
       margin-bottom: 15px;
+      background: #fdfdfd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-
-    #preview h4 {
-      font-size: 18px;
-      color: #222;
-      margin-bottom: 8px;
-      text-align: center;
+    .article-card img {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-right: 15px;
     }
-
-    #preview p {
-      color: #555;
-      font-size: 15px;
-      text-align: center;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 25px;
-      }
+    .article-info {
+      flex: 1;
     }
   </style>
 </head>
-
 <body>
-  <!-- Login Section -->
-  <div class="container" id="login-section">
-    <h1><i class="fa-solid fa-lock"></i> Admin Login</h1>
-    <div>
-      <input type="email" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Password" />
-      <button id="loginBtn">Login</button>
-      <p class="error" id="loginError"></p>
-    </div>
-  </div>
 
-  <!-- Admin Section -->
-  <div class="container" id="admin-section" style="display:none;">
-    <h1><i class="fa-solid fa-newspaper"></i> Add New Article</h1>
-    <form id="articleForm">
-      <div class="form-group">
-        <label for="title">Article Title</label>
-        <input type="text" id="title" required />
-      </div>
-      <div class="form-group">
-        <label for="summary">Summary</label>
-        <textarea id="summary" required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="imageUrl">Image URL</label>
-        <input type="url" id="imageUrl" placeholder="Paste image link (supports Google Drive links)" />
-      </div>
-      <button type="submit">Publish Article</button>
-      <p class="success" id="successMsg"></p>
-    </form>
+  <div class="container">
+    <h1>Daily Holiday Admin Panel</h1>
 
-    <!-- 🔹 Live Preview -->
+    <h2>Create New Article</h2>
+
+    <label for="title">Article Title</label>
+    <input type="text" id="title" placeholder="Enter article title" />
+
+    <label for="summary">Summary</label>
+    <textarea id="summary" rows="3" placeholder="Short summary (will show on homepage)"></textarea>
+
+    <label for="imageInput">Upload Image (or paste Google Drive link below)</label>
+    <input type="file" id="imageInput" accept="image/*" />
+    <input type="text" id="imageLink" placeholder="Or paste Google Drive/share image link" />
+
+    <label for="editor">Full Article Content</label>
+    <div id="editor" style="height: 250px;"></div>
+
+    <button id="publishBtn">Publish Article</button>
+
     <div id="preview">
       <h3>Live Preview</h3>
-      <img id="previewImage" src="" alt="Preview Image" style="display:none;">
-      <h4 id="previewTitle">Your title will appear here</h4>
-      <p id="previewSummary">Your summary will appear here...</p>
+      <div id="previewContent"></div>
     </div>
 
-    <button class="logout-btn" id="logoutBtn">Logout</button>
+    <h2>Manage Articles</h2>
+    <div class="article-list" id="articleList">
+      <p>Loading articles...</p>
+    </div>
   </div>
 
-  <!-- Firebase Script -->
+  <!-- Firebase SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-    import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
+    import { 
+      getFirestore, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, serverTimestamp 
+    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+    import { 
+      getStorage, ref, uploadBytes, getDownloadURL 
+    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
 
+    // Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyBS7C50eMiRtQ4nge4HrXo0ZuEkKoIVIUE",
       authDomain: "daily-holiday.firebaseapp.com",
@@ -236,104 +161,209 @@
     };
 
     const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
     const db = getFirestore(app);
     const storage = getStorage(app);
 
-    const loginSection = document.getElementById("login-section");
-    const adminSection = document.getElementById("admin-section");
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const loginError = document.getElementById("loginError");
-    const successMsg = document.getElementById("successMsg");
-    const progressBar = document.getElementById("uploadProgress");
-
-    const previewImage = document.getElementById("previewImage");
-    const previewTitle = document.getElementById("previewTitle");
-    const previewSummary = document.getElementById("previewSummary");
-
-    let uploadedImageURL = "";
-
-    // Live text preview
-    document.getElementById("title").addEventListener("input", (e) => {
-      previewTitle.textContent = e.target.value || "Your title will appear here";
-    });
-
-    document.getElementById("summary").addEventListener("input", (e) => {
-      previewSummary.textContent = e.target.value || "Your summary will appear here...";
-    });
-
-    // Login
-    loginBtn.addEventListener("click", async () => {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
-        loginError.textContent = "";
-      } catch {
-        loginError.textContent = "Invalid login credentials!";
+    // Quill Editor
+    const quill = new Quill('#editor', {
+      theme: 'snow',
+      placeholder: 'Write your article here...',
+      modules: {
+        toolbar: [
+          [{ 'header': [1, 2, 3, false] }],
+          ['bold', 'italic', 'underline', 'strike'],
+          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+          [{ 'align': [] }],
+          ['link', 'image', 'blockquote', 'code-block'],
+          ['clean']
+        ]
       }
     });
 
-    // Logout
-    logoutBtn.addEventListener("click", async () => {
-      await signOut(auth);
-    });
+    const titleInput = document.getElementById('title');
+    const summaryInput = document.getElementById('summary');
+    const imageInput = document.getElementById('imageInput');
+    const imageLink = document.getElementById('imageLink');
+    const publishBtn = document.getElementById('publishBtn');
+    const previewContent = document.getElementById('previewContent');
+    const articleList = document.getElementById('articleList');
 
-    // Auth State
-    onAuthStateChanged(auth, (user) => {
-      loginSection.style.display = user ? "none" : "block";
-      adminSection.style.display = user ? "block" : "none";
-    });
-
-    // Image Upload + Preview
-    document.getElementById("imageUrl").addEventListener("input", (e) => {
-      const url = e.target.value.trim();
-      if (!url) return;
-    
-      let finalUrl = url;
-    
-      // 🧠 Handle Google Drive links
-      const driveMatch = url.match(/\/d\/(.*?)\//);
-      if (driveMatch && driveMatch[1]) {
-        finalUrl = `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+    // Convert Google Drive links
+    function normalizeDriveLink(url) {
+      if (!url) return "";
+      url = url.trim();
+      const patterns = [
+        /\/file\/d\/([a-zA-Z0-9_-]{10,})/,
+        /\/d\/([a-zA-Z0-9_-]{10,})/,
+        /[\?&]id=([a-zA-Z0-9_-]{10,})/,
+      ];
+      for (const re of patterns) {
+        const match = url.match(re);
+        if (match && match[1]) {
+          return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+        }
       }
-    
-      previewImage.src = finalUrl;
-      previewImage.style.display = "block";
-      uploadedImageURL = finalUrl; // same variable used for article publishing
-    });
+      return url;
+    }
 
-    // Submit Article
-    document.getElementById("articleForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const title = document.getElementById("title").value;
-      const summary = document.getElementById("summary").value;
+    // Live Preview
+    function updatePreview() {
+      const title = titleInput.value;
+      const summary = summaryInput.value;
+      const content = quill.root.innerHTML;
+      const imageFile = imageInput.files[0];
+      const driveLink = normalizeDriveLink(imageLink.value);
 
-      if (!uploadedImageURL) {
-        alert("Please enter a valid image link.");
+      let imgHTML = '';
+      if (imageFile) {
+        const imgUrl = URL.createObjectURL(imageFile);
+        imgHTML = `<img src="${imgUrl}" alt="Preview Image">`;
+      } else if (driveLink) {
+        imgHTML = `<img src="${driveLink}" alt="Preview Image">`;
+      }
+
+      previewContent.innerHTML = `
+        ${imgHTML}
+        <h4>${title}</h4>
+        <p><em>${summary}</em></p>
+        <div>${content}</div>
+      `;
+    }
+
+    titleInput.addEventListener('input', updatePreview);
+    summaryInput.addEventListener('input', updatePreview);
+    imageInput.addEventListener('change', updatePreview);
+    imageLink.addEventListener('input', updatePreview);
+    quill.on('text-change', updatePreview);
+
+    // Publish Article
+    publishBtn.addEventListener('click', async () => {
+      const title = titleInput.value.trim();
+      const summary = summaryInput.value.trim();
+      const content = quill.root.innerHTML;
+      const imageFile = imageInput.files[0];
+      const driveLink = normalizeDriveLink(imageLink.value);
+
+      if (!title || !summary || !content) {
+        alert("Please fill all fields before publishing.");
         return;
       }
 
+      let imageURL = "";
       try {
+        publishBtn.disabled = true;
+        publishBtn.textContent = "Uploading...";
+
+        if (imageFile) {
+          const storageRef = ref(storage, 'articles/' + imageFile.name);
+          await uploadBytes(storageRef, imageFile);
+          imageURL = await getDownloadURL(storageRef);
+        } else if (driveLink) {
+          imageURL = driveLink;
+        }
+
         await addDoc(collection(db, "articles"), {
-          title,
-          summary,
-          imageURL: uploadedImageURL,
-          createdAt: serverTimestamp(),
+          title, summary, content, imageURL, createdAt: serverTimestamp()
         });
-        successMsg.textContent = "✅ Article published successfully!";
-        e.target.reset();
-        uploadedImageURL = "";
-        progressBar.style.width = "0%";
-        previewImage.style.display = "none";
-        previewTitle.textContent = "Your title will appear here";
-        previewSummary.textContent = "Your summary will appear here...";
-        setTimeout(() => (successMsg.textContent = ""), 3000);
-      } catch {
-        successMsg.textContent = "❌ Error publishing article!";
+
+        alert("✅ Article published successfully!");
+        titleInput.value = "";
+        summaryInput.value = "";
+        imageInput.value = "";
+        imageLink.value = "";
+        quill.root.innerHTML = "";
+        previewContent.innerHTML = "";
+        loadArticles();
+      } catch (err) {
+        console.error(err);
+        alert("❌ Error publishing article.");
+      } finally {
+        publishBtn.disabled = false;
+        publishBtn.textContent = "Publish Article";
       }
     });
+
+    // Load Articles
+    async function loadArticles() {
+      articleList.innerHTML = "<p>Loading...</p>";
+      const snapshot = await getDocs(collection(db, "articles"));
+      if (snapshot.empty) {
+        articleList.innerHTML = "<p>No articles yet.</p>";
+        return;
+      }
+
+      articleList.innerHTML = "";
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const id = docSnap.id;
+        const image = data.imageURL || "";
+        const title = data.title || "";
+        const summary = data.summary || "";
+
+        const card = document.createElement('div');
+        card.className = 'article-card';
+        card.innerHTML = `
+          <img src="${image}" alt="">
+          <div class="article-info">
+            <strong>${title}</strong>
+            <p>${summary.substring(0, 60)}...</p>
+          </div>
+          <div>
+            <button class="editBtn" data-id="${id}">Edit</button>
+            <button class="danger deleteBtn" data-id="${id}">Delete</button>
+          </div>
+        `;
+        articleList.appendChild(card);
+      });
+
+      // Attach delete handlers
+      document.querySelectorAll('.deleteBtn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          const id = e.target.getAttribute('data-id');
+          if (confirm("Are you sure you want to delete this article?")) {
+            await deleteDoc(doc(db, "articles", id));
+            alert("🗑️ Article deleted.");
+            loadArticles();
+          }
+        });
+      });
+
+      // Attach edit handlers
+      document.querySelectorAll('.editBtn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          const id = e.target.getAttribute('data-id');
+          const docRef = doc(db, "articles", id);
+          const docSnap = snapshot.docs.find(d => d.id === id);
+          const data = docSnap.data();
+
+          // Load values into form for editing
+          titleInput.value = data.title;
+          summaryInput.value = data.summary;
+          quill.root.innerHTML = data.content;
+          imageLink.value = data.imageURL;
+          updatePreview();
+
+          publishBtn.textContent = "Update Article";
+          publishBtn.onclick = async () => {
+            await updateDoc(docRef, {
+              title: titleInput.value,
+              summary: summaryInput.value,
+              content: quill.root.innerHTML,
+              imageURL: normalizeDriveLink(imageLink.value)
+            });
+            alert("✅ Article updated!");
+            publishBtn.textContent = "Publish Article";
+            publishBtn.onclick = null;
+            loadArticles();
+          };
+        });
+      });
+    }
+
+    loadArticles();
   </script>
+
+  <!-- Quill JS -->
+  <script src="https://cdn.quilljs.com/1.3.7/quill.js"></script>
 </body>
 </html>
