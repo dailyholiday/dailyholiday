@@ -534,11 +534,18 @@
         }
       }
 
-      /* ===== ARTICLE MODAL LAYOUT FIX ===== */
+      /* ===== ARTICLE MODAL LAYOUT FIX (FINAL) ===== */
+      #articleModal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+      
       #articleModal > div {
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
+        align-items: stretch;
         background: #fff;
         max-width: 1000px;
         width: 100%;
@@ -546,7 +553,8 @@
         overflow: hidden;
         box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
       }
-
+      
+      /* Image on the left */
       #modalImageWrap {
         flex: 1 1 50%;
         background: #000;
@@ -554,30 +562,46 @@
         align-items: center;
         justify-content: center;
       }
-
+      
+      #modalImageWrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      /* Text on the right */
       #articleModal > div > div:last-child {
         flex: 1 1 50%;
-        padding: 24px;
-        max-height: 90vh;
+        padding: 28px;
+        max-height: 85vh;
         overflow-y: auto;
         text-align: left;
       }
-
+      
+      /* Responsive layout for mobile */
       @media (max-width: 768px) {
+        #articleModal {
+          padding: 20px 0; /* margin above and below modal on small screens */
+        }
+      
         #articleModal > div {
           flex-direction: column;
+          margin: 10px 0; /* add breathing space vertically */
+          width: 95%;
         }
-
+      
         #modalImageWrap {
-          flex: 1 1 100%;
-          max-height: 50vh;
+          flex: none;
+          max-height: 45vh;
         }
-
+      
         #articleModal > div > div:last-child {
-          flex: 1 1 100%;
+          flex: none;
           max-height: none;
+          padding: 20px;
         }
       }
+
     </style>
   </head>
 
@@ -969,6 +993,7 @@
 
 </body>
 </html>
+
 
 
 
