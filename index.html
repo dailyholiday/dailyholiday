@@ -543,19 +543,19 @@
         }
       }
       
-      /* ===== FIXED ARTICLE MODAL SCROLL ===== */
+      /* ===== ARTICLE MODAL LAYOUT (FINAL SCROLL FIX) ===== */
       #articleModal {
         position: fixed;
         inset: 0;
-        display: none; /* hidden by default */
+        display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 2000;
-        overflow-y: auto; /* allow full-page scrolling on mobile */
-        padding: 20px;
+        background: rgba(0, 0, 0, 0.5); /* dim overlay */
+        z-index: 1000;
+        padding: 40px 20px;
       }
       
+      /* Modal box container */
       #articleModal .modal-content {
         display: flex;
         flex-direction: row;
@@ -566,61 +566,61 @@
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
-        margin: auto;
+        max-height: 90vh; /* ensures modal fits screen */
       }
       
-      #modalImageWrap {
+      /* Image area */
+      #articleModal .modal-content #modalImageWrap {
         flex: 0 0 40%;
-        background: #000;
+        background: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
-        max-height: 90vh;
       }
       
-      #modalImageWrap img {
+      #articleModal .modal-content #modalImageWrap img {
         width: 100%;
-        height: auto;
-        object-fit: contain;
-        display: block;
+        height: 100%;
+        object-fit: cover;
       }
       
-      .article-modal-content {
-        flex: 1;
+      /* Text area (scrollable part) */
+      #articleModal .modal-content .article-modal-content {
+        flex: 0 0 60%;
         padding: 28px;
-        overflow-y: auto;
-        max-height: 90vh;
+        overflow-y: auto; /* <— allows scrolling only inside text area */
         text-align: left;
       }
       
-      /* Responsive layout for mobile */
+      /* Disable main page scroll when modal open */
+      body.modal-open {
+        overflow: hidden;
+      }
+      
+      /* ===== Responsive ===== */
       @media (max-width: 768px) {
         #articleModal {
-          align-items: flex-start;
-          padding: 0;
+          padding: 20px 0;
         }
       
         #articleModal .modal-content {
           flex-direction: column;
-          width: 100%;
-          height: auto;
-          max-height: none;
-          border-radius: 0;
+          width: 95%;
+          max-height: 90vh;
+          margin: 10px 0;
         }
       
-        #modalImageWrap {
-          width: 100%;
+        #articleModal .modal-content #modalImageWrap {
           flex: none;
-          max-height: 50vh;
+          max-height: 45vh;
         }
       
-        .article-modal-content {
+        #articleModal .modal-content .article-modal-content {
           flex: none;
           padding: 20px;
-          overflow-y: visible; /* let the whole modal scroll naturally */
+          overflow-y: auto; /* still scrollable on mobile */
         }
       }
-
     </style>
   </head>
 
@@ -932,38 +932,34 @@
       return card;
     }
   
+    // Open modal showing full article content
     function openModalWithDoc(doc) {
       const data = doc.data();
       const title = data.title || 'Untitled';
-      const content = data.content || data.summary || '';
+      const summary = data.summary || '';
+      const content = data.content || summary; // fall back to summary if full content missing
       const image = normalizeImageURL(data.imageURL || '');
-    
+  
       document.getElementById('modalTitle').textContent = title;
-      document.getElementById('modalContent').innerHTML = `<div>${content}</div>`;
-    
+      document.getElementById('modalContent').innerHTML = `
+        <div class="article-modal-content">${content}</div>
+      `;
       const modalImg = document.getElementById('modalImage');
       modalImg.src = image;
       modalImg.alt = title;
-    
-      const modal = document.getElementById('articleModal');
-      modal.style.display = 'flex';
-      document.body.classList.add('modal-open');
+  
+      document.getElementById('articleModal').style.display = 'flex';
     }
-    
-    // Close modal
+  
+    // hide modal
     document.getElementById('modalClose').addEventListener('click', () => {
-      const modal = document.getElementById('articleModal');
-      modal.style.display = 'none';
-      document.body.classList.remove('modal-open');
+      document.getElementById('articleModal').style.display = 'none';
     });
-    
+    // hide modal when clicking outside content
     document.getElementById('articleModal').addEventListener('click', (e) => {
-      if (e.target.id === 'articleModal') {
-        e.currentTarget.style.display = 'none';
-        document.body.classList.remove('modal-open');
-      }
+      if (e.target.id === 'articleModal') document.getElementById('articleModal').style.display = 'none';
     });
-    
+  
     // load articles (with pagination)
     async function loadArticles() {
       if (finished) return;
@@ -1030,4 +1026,3 @@
 
 </body>
 </html>
-
