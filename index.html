@@ -534,7 +534,7 @@
         }
       }
 
-      /* ===== ARTICLE MODAL LAYOUT FIX (FINAL) ===== */
+      /* ===== ARTICLE MODAL LAYOUT FIX (FINAL – VERIFIED STRUCTURE) ===== */
       #articleModal {
         display: flex;
         align-items: center;
@@ -542,7 +542,7 @@
         padding: 40px 20px;
       }
       
-      #articleModal > div {
+      #articleModal .modal-content {
         display: flex;
         flex-direction: row;
         align-items: stretch;
@@ -554,8 +554,8 @@
         box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
       }
       
-      /* Image on the left */
-      #modalImageWrap {
+      /* Image area (left side) */
+      #articleModal .modal-content #modalImageWrap {
         flex: 1 1 50%;
         background: #000;
         display: flex;
@@ -563,14 +563,14 @@
         justify-content: center;
       }
       
-      #modalImageWrap img {
+      #articleModal .modal-content #modalImageWrap img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
       
-      /* Text on the right */
-      #articleModal > div > div:last-child {
+      /* Text area (right side) */
+      #articleModal .modal-content .article-modal-content {
         flex: 1 1 50%;
         padding: 28px;
         max-height: 85vh;
@@ -581,21 +581,21 @@
       /* Responsive layout for mobile */
       @media (max-width: 768px) {
         #articleModal {
-          padding: 20px 0; /* margin above and below modal on small screens */
+          padding: 20px 0; /* top-bottom margin for mobile */
         }
       
-        #articleModal > div {
+        #articleModal .modal-content {
           flex-direction: column;
-          margin: 10px 0; /* add breathing space vertically */
+          margin: 10px 0;
           width: 95%;
         }
       
-        #modalImageWrap {
+        #articleModal .modal-content #modalImageWrap {
           flex: none;
           max-height: 45vh;
         }
       
-        #articleModal > div > div:last-child {
+        #articleModal .modal-content .article-modal-content {
           flex: none;
           max-height: none;
           padding: 20px;
@@ -993,6 +993,7 @@
 
 </body>
 </html>
+
 
 
 
