@@ -543,21 +543,21 @@
         }
       }
 
-      /* ===== ARTICLE MODAL LAYOUT (FINAL ONE-SCROLL FIX) ===== */
+      /* ===== FINAL STABLE MODAL (ONE SCROLL, WORKS ON MOBILE & DESKTOP) ===== */
       #articleModal {
         position: fixed;
         inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(0, 0, 0, 0.5); /* overlay dim */
+        background: rgba(0,0,0,0.5);
         z-index: 1000;
-        padding: 40px 20px;
-        overflow-y: auto; /* only one scrollbar for modal content */
-        overscroll-behavior: contain;
+        padding: 20px;
+        /* IMPORTANT: overlay itself is NOT scrollable; inner area manages scrolling */
+        overflow: hidden;
       }
       
-      /* Modal box */
+      /* Modal box: constrained to viewport height */
       #articleModal .modal-content {
         display: flex;
         flex-direction: row;
@@ -566,59 +566,71 @@
         max-width: 1000px;
         width: 100%;
         border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
-        margin: auto; /* center vertically */
+        overflow: hidden; /* prevents inner overflow from escaping */
+        box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+        max-height: calc(100vh - 80px); /* <-- ensures modal fits inside viewport with margin */
       }
       
-      /* Image area */
+      /* Image area (left) */
       #articleModal .modal-content #modalImageWrap {
         flex: 0 0 40%;
         background: #fff;
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
       }
       
       #articleModal .modal-content #modalImageWrap img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        display: block;
       }
       
-      /* Text area */
+      /* Text area (right) — THIS is the only scrolling element */
       #articleModal .modal-content .article-modal-content {
-        flex: 0 0 60%;
-        padding: 28px;
-        text-align: left;
-        overflow: visible; /* disable inner scroll */
+        flex: 1 1 60%;
+        padding: 24px;
+        overflow-y: auto;                      /* single scrollbar lives here */
+        -webkit-overflow-scrolling: touch;     /* smooth iOS scrolling */
+        box-sizing: border-box;
       }
       
-      /* Disable background scroll when modal open */
+      /* Make sure long inner content has breathing room */
+      #articleModal .modal-content .article-modal-content > * {
+        margin-bottom: 0.8rem;
+      }
+      
+      /* Freeze background page when modal open */
       body.modal-open {
         overflow: hidden;
+        touch-action: none;
       }
       
-      /* ===== Responsive ===== */
+      /* ===== Responsive (mobile) ===== */
       @media (max-width: 768px) {
         #articleModal {
-          padding: 20px 0;
-          align-items: flex-start;
+          padding: 10px;
+          align-items: flex-start; /* allow modal to start a bit from top */
         }
       
         #articleModal .modal-content {
           flex-direction: column;
           width: 95%;
-          margin: 20px auto;
+          max-height: calc(100vh - 40px);
+          margin: 10px auto;
         }
       
         #articleModal .modal-content #modalImageWrap {
           flex: none;
+          width: 100%;
           max-height: 40vh;
         }
       
         #articleModal .modal-content .article-modal-content {
           flex: none;
+          max-height: calc(100vh - 40vh - 80px); /* give the text area enough scrollable height */
           padding: 20px;
         }
       }
@@ -1024,10 +1036,24 @@
     
     document.body.classList.add('modal-open'); // when opening
     document.body.classList.remove('modal-open'); // when closing
+
+    // OPEN modal (example)
+    function openArticleModal() {
+      document.getElementById('articleModal').style.display = 'flex';
+      document.body.classList.add('modal-open'); // freeze background
+    }
+    
+    // CLOSE modal (example)
+    function closeArticleModal() {
+      document.getElementById('articleModal').style.display = 'none';
+      document.body.classList.remove('modal-open'); // re-enable background
+    }
+
   </script>
 
 </body>
 </html>
+
 
 
 
