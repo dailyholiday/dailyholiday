@@ -569,8 +569,8 @@
   <!-- Modal (popout) -->
   <div id="articleModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2000;align-items:center;justify-content:center;padding:20px;">
     <div style="background:#fff;max-width:1000px;width:100%;border-radius:10px;overflow:hidden;display:flex;flex-wrap:wrap;">
-      <div id="modalImageWrap" style="flex:1 1 100%;max-height:90vh;display:flex;align-items:center;justify-content:center;background:#000;">
-        <img id="modalImage" src="" alt="" style="max-width:100%;max-height:90vh;object-fit:contain;display:block;margin:auto;border-radius:0;">
+      <div id="modalImageWrap" style="flex:1 1 100%;max-height:90vh;display:flex;justify-content:center;background:#000;">
+        <img id="modalImage" class="modal-article-image" src="" alt="">
       </div>
       <div style="flex:1 1 420px;padding:22px;max-height:80vh;overflow:auto;">
         <button id="modalClose" style="float:right;background:#eee;border:0;padding:6px 10px;border-radius:6px;cursor:pointer;margin:-14px -14px 10px 0;">Close ✕</button>
@@ -910,6 +910,7 @@
 
 </body>
 </html>
+
 
 
 
