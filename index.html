@@ -621,6 +621,39 @@
           overflow-y: auto; /* still scrollable on mobile */
         }
       }
+
+      /* ===== Minimal mobile-scroll fix for article modal ===== */
+      /* Allow the overlay to scroll on small screens */
+      #articleModal {
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important; /* smooth scroll on iOS */
+      }
+      
+      /* Allow the article text area to scroll and limit its height so mobile can scroll the whole modal */
+      #articleModal .article-modal-content {
+        max-height: calc(100vh - 140px) !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        -ms-overflow-style: auto !important; /* ensure visible scrollbar on some browsers */
+      }
+      
+      /* Ensure the inner modal box doesn't forcibly hide overflow on small screens */
+      #articleModal .modal-content {
+        max-height: none !important;
+      }
+      
+      /* Slight responsive tweak: if viewport is narrow, let overlay start near top */
+      @media (max-width: 768px) {
+        #articleModal {
+          padding-top: 12px !important;
+          padding-bottom: 12px !important;
+          align-items: flex-start !important;
+        }
+        #articleModal .article-modal-content {
+          max-height: calc(100vh - 120px) !important;
+        }
+      }
+
     </style>
   </head>
 
@@ -1026,3 +1059,4 @@
 
 </body>
 </html>
+
