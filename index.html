@@ -461,6 +461,63 @@
       .article-modal-content p {
         margin-bottom: 0.6em;
       }
+      #articles-list {
+        /* use grid but center the grid area and limit width so cards center */
+        display: grid !important;
+        grid-template-columns: repeat(3, 320px) !important; /* 3 cards per row */
+        justify-content: center !important; /* center the whole grid */
+        gap: 28px !important;
+        max-width: 1100px; /* container max width */
+        margin: 0 auto; /* center container */
+        padding: 0 16px;
+        box-sizing: border-box;
+      }
+      
+      /* Force card width & consistent look even if JS adds inline styles */
+      .article-card {
+        width: 320px !important;
+        min-width: 0 !important;
+        max-width: 320px !important;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        box-sizing: border-box;
+      }
+      
+      /* Card internals */
+      .article-card img {
+        height: 200px;
+        object-fit: cover;
+      }
+      
+      /* Readjust the card content area class if necessary */
+      .article-card > div {
+        padding: 14px !important;
+      }
+      
+      /* Responsive: 2 columns for medium screens, 1 column for mobile */
+      @media (max-width: 992px) {
+        #articles-list {
+          grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
+          max-width: 760px;
+        }
+        .article-card {
+          width: 100% !important;
+          max-width: none !important;
+        }
+      }
+      
+      @media (max-width: 600px) {
+        #articles-list {
+          grid-template-columns: 1fr !important;
+          gap: 18px;
+          max-width: 480px;
+          padding: 0 12px;
+        }
+        .article-card {
+          width: 100% !important;
+        }
+      }
   </style>
 </head>
 <body id="top">
@@ -841,6 +898,7 @@
 
 </body>
 </html>
+
 
 
 
