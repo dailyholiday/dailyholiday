@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel - Daily Holiday</title>
-
-  <!-- Quill CSS (Rich Text Editor) -->
   <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
 
   <style>
@@ -40,9 +38,7 @@
       font-weight: 600;
       color: #333;
     }
-    input[type="text"],
-    textarea,
-    input[type="file"] {
+    input[type="text"], textarea, input[type="file"], input[type="email"], input[type="password"] {
       width: 100%;
       padding: 10px;
       border-radius: 6px;
@@ -60,15 +56,9 @@
       font-weight: bold;
       margin: 5px;
     }
-    button:hover {
-      background: #005dc5;
-    }
-    .danger {
-      background: #e74c3c;
-    }
-    .danger:hover {
-      background: #c0392b;
-    }
+    button:hover { background: #005dc5; }
+    .danger { background: #e74c3c; }
+    .danger:hover { background: #c0392b; }
     #preview {
       border: 2px dashed #0078FF;
       border-radius: 10px;
@@ -76,14 +66,8 @@
       margin-top: 30px;
       background: #f8faff;
     }
-    #preview img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .article-list {
-      margin-top: 20px;
-    }
+    #preview img { max-width: 100%; border-radius: 10px; margin-bottom: 15px; }
+    .article-list { margin-top: 20px; }
     .article-card {
       border: 1px solid #ccc;
       border-radius: 10px;
@@ -101,18 +85,45 @@
       border-radius: 6px;
       margin-right: 15px;
     }
-    .article-info {
-      flex: 1;
+    .article-info { flex: 1; }
+
+    /* Login screen */
+    #loginContainer {
+      max-width: 400px;
+      margin: 100px auto;
+      background: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    #loginContainer h2 {
+      color: #0078FF;
+      margin-bottom: 20px;
+    }
+    #logoutBtn {
+      float: right;
+      background: #e74c3c;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <!-- LOGIN PAGE -->
+  <div id="loginContainer">
+    <h2>Admin Login</h2>
+    <input type="email" id="loginEmail" placeholder="Email" />
+    <input type="password" id="loginPassword" placeholder="Password" />
+    <button id="loginBtn">Login</button>
+    <p id="loginError" style="color:red;"></p>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div class="container" id="adminPanel" style="display:none;">
+    <button id="logoutBtn">Logout</button>
     <h1>Daily Holiday Admin Panel</h1>
 
     <h2>Create New Article</h2>
-
     <label for="title">Article Title</label>
     <input type="text" id="title" placeholder="Enter article title" />
 
@@ -139,7 +150,6 @@
     </div>
   </div>
 
-  <!-- Firebase SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
     import { 
@@ -148,6 +158,9 @@
     import { 
       getStorage, ref, uploadBytes, getDownloadURL 
     } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
+    import {
+      getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
     // Firebase Config
     const firebaseConfig = {
@@ -163,8 +176,46 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const storage = getStorage(app);
+    const auth = getAuth(app);
 
-    // Quill Editor
+    // DOM
+    const loginContainer = document.getElementById("loginContainer");
+    const adminPanel = document.getElementById("adminPanel");
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const loginError = document.getElementById("loginError");
+
+    // Auth state listener
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        loginContainer.style.display = "none";
+        adminPanel.style.display = "block";
+        loadArticles();
+      } else {
+        loginContainer.style.display = "block";
+        adminPanel.style.display = "none";
+      }
+    });
+
+    // Login
+    loginBtn.addEventListener("click", async () => {
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+      loginError.textContent = "";
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (error) {
+        loginError.textContent = "Invalid email or password.";
+        console.error(error);
+      }
+    });
+
+    // Logout
+    logoutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+    });
+
+    // Quill
     const quill = new Quill('#editor', {
       theme: 'snow',
       placeholder: 'Write your article here...',
@@ -188,7 +239,6 @@
     const previewContent = document.getElementById('previewContent');
     const articleList = document.getElementById('articleList');
 
-    // Convert Google Drive links
     function normalizeDriveLink(url) {
       if (!url) return "";
       url = url.trim();
@@ -206,7 +256,6 @@
       return url;
     }
 
-    // Live Preview
     function updatePreview() {
       const title = titleInput.value;
       const summary = summaryInput.value;
@@ -236,7 +285,6 @@
     imageLink.addEventListener('input', updatePreview);
     quill.on('text-change', updatePreview);
 
-    // Publish Article
     publishBtn.addEventListener('click', async () => {
       const title = titleInput.value.trim();
       const summary = summaryInput.value.trim();
@@ -283,7 +331,6 @@
       }
     });
 
-    // Load Articles
     async function loadArticles() {
       articleList.innerHTML = "<p>Loading...</p>";
       const snapshot = await getDocs(collection(db, "articles"));
@@ -316,7 +363,6 @@
         articleList.appendChild(card);
       });
 
-      // Attach delete handlers
       document.querySelectorAll('.deleteBtn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
           const id = e.target.getAttribute('data-id');
@@ -328,15 +374,12 @@
         });
       });
 
-      // Attach edit handlers
       document.querySelectorAll('.editBtn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
           const id = e.target.getAttribute('data-id');
-          const docRef = doc(db, "articles", id);
           const docSnap = snapshot.docs.find(d => d.id === id);
           const data = docSnap.data();
 
-          // Load values into form for editing
           titleInput.value = data.title;
           summaryInput.value = data.summary;
           quill.root.innerHTML = data.content;
@@ -345,7 +388,7 @@
 
           publishBtn.textContent = "Update Article";
           publishBtn.onclick = async () => {
-            await updateDoc(docRef, {
+            await updateDoc(doc(db, "articles", id), {
               title: titleInput.value,
               summary: summaryInput.value,
               content: quill.root.innerHTML,
@@ -353,17 +396,13 @@
             });
             alert("✅ Article updated!");
             publishBtn.textContent = "Publish Article";
-            publishBtn.onclick = null;
             loadArticles();
           };
         });
       });
     }
-
-    loadArticles();
   </script>
 
-  <!-- Quill JS -->
   <script src="https://cdn.quilljs.com/1.3.7/quill.js"></script>
 </body>
 </html>
