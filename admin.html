@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Panel - Daily Holiday</title>
   <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet" />
-
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,7 +23,6 @@
     h1 {
       text-align: center;
       color: #0078FF;
-      margin-bottom: 20px;
     }
     h2 {
       color: #0078FF;
@@ -32,94 +30,55 @@
       padding-bottom: 5px;
       margin-top: 40px;
     }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: 600;
-      color: #333;
-    }
-    input[type="text"], textarea, input[type="file"], input[type="email"], input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-top: 5px;
-      box-sizing: border-box;
+    label { display: block; margin-top: 15px; font-weight: 600; color: #333; }
+    input[type="text"], input[type="email"], input[type="password"], textarea, input[type="file"] {
+      width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc; margin-top: 5px;
     }
     button {
-      background: #0078FF;
-      color: #fff;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      margin: 5px;
+      background: #0078FF; color: #fff; border: none; padding: 10px 16px;
+      border-radius: 8px; cursor: pointer; font-weight: bold; margin: 5px;
     }
     button:hover { background: #005dc5; }
     .danger { background: #e74c3c; }
     .danger:hover { background: #c0392b; }
-    #preview {
-      border: 2px dashed #0078FF;
-      border-radius: 10px;
-      padding: 20px;
-      margin-top: 30px;
-      background: #f8faff;
-    }
+    #preview { border: 2px dashed #0078FF; border-radius: 10px; padding: 20px; margin-top: 30px; background: #f8faff; }
     #preview img { max-width: 100%; border-radius: 10px; margin-bottom: 15px; }
     .article-list { margin-top: 20px; }
     .article-card {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 15px;
-      background: #fdfdfd;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      border: 1px solid #ccc; border-radius: 10px; padding: 15px; margin-bottom: 15px;
+      background: #fdfdfd; display: flex; align-items: center; justify-content: space-between;
     }
-    .article-card img {
-      width: 100px;
-      height: 70px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-right: 15px;
-    }
+    .article-card img { width: 100px; height: 70px; object-fit: cover; border-radius: 6px; margin-right: 15px; }
     .article-info { flex: 1; }
 
-    /* Login screen */
-    #loginContainer {
+    /* Login Page */
+    #loginSection {
       max-width: 400px;
       margin: 100px auto;
-      background: #fff;
-      border-radius: 10px;
+      background: white;
       padding: 30px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
-      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
     }
-    #loginContainer h2 {
-      color: #0078FF;
-      margin-bottom: 20px;
-    }
-    #logoutBtn {
-      float: right;
-      background: #e74c3c;
-    }
+    #loginSection h2 { text-align: center; color: #0078FF; }
+    #logoutBtn { float: right; background: #e74c3c; }
   </style>
 </head>
 <body>
 
-  <!-- LOGIN PAGE -->
-  <div id="loginContainer">
+  <!-- 🔒 Login Section -->
+  <div id="loginSection">
     <h2>Admin Login</h2>
-    <input type="email" id="loginEmail" placeholder="Email" />
-    <input type="password" id="loginPassword" placeholder="Password" />
+    <label for="loginEmail">Email</label>
+    <input type="email" id="loginEmail" placeholder="Enter your email" />
+    <label for="loginPassword">Password</label>
+    <input type="password" id="loginPassword" placeholder="Enter your password" />
     <button id="loginBtn">Login</button>
-    <p id="loginError" style="color:red;"></p>
+    <p id="loginError" style="color:red; display:none;"></p>
   </div>
 
-  <!-- ADMIN PANEL -->
-  <div class="container" id="adminPanel" style="display:none;">
+  <!-- 🛠️ Admin Section -->
+  <div class="container" id="adminSection" style="display:none;">
     <button id="logoutBtn">Logout</button>
     <h1>Daily Holiday Admin Panel</h1>
 
@@ -150,19 +109,21 @@
     </div>
   </div>
 
+  <!-- ✅ Firebase + Admin Logic -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+    import { 
+      getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut 
+    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
     import { 
       getFirestore, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, serverTimestamp 
     } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
     import { 
       getStorage, ref, uploadBytes, getDownloadURL 
     } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
-    import {
-      getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged
-    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
 
-    // Firebase Config
+    // ✅ Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyBS7C50eMiRtQ4nge4HrXo0ZuEkKoIVIUE",
       authDomain: "daily-holiday.firebaseapp.com",
@@ -174,51 +135,47 @@
     };
 
     const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
     const db = getFirestore(app);
     const storage = getStorage(app);
-    const auth = getAuth(app);
 
-    // DOM
-    const loginContainer = document.getElementById("loginContainer");
-    const adminPanel = document.getElementById("adminPanel");
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const loginError = document.getElementById("loginError");
+    // 🔒 Auth UI
+    const loginSection = document.getElementById('loginSection');
+    const adminSection = document.getElementById('adminSection');
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const loginError = document.getElementById('loginError');
 
-    // Auth state listener
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        loginContainer.style.display = "none";
-        adminPanel.style.display = "block";
-        loadArticles();
-      } else {
-        loginContainer.style.display = "block";
-        adminPanel.style.display = "none";
-      }
-    });
+    loginBtn.addEventListener('click', async () => {
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
 
-    // Login
-    loginBtn.addEventListener("click", async () => {
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value.trim();
-      loginError.textContent = "";
       try {
         await signInWithEmailAndPassword(auth, email, password);
-      } catch (error) {
-        loginError.textContent = "Invalid email or password.";
-        console.error(error);
+        loginError.style.display = 'none';
+      } catch (err) {
+        loginError.textContent = "❌ Invalid email or password.";
+        loginError.style.display = 'block';
       }
     });
 
-    // Logout
-    logoutBtn.addEventListener("click", async () => {
-      await signOut(auth);
+    logoutBtn.addEventListener('click', () => signOut(auth));
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        loginSection.style.display = 'none';
+        adminSection.style.display = 'block';
+        loadArticles();
+      } else {
+        loginSection.style.display = 'block';
+        adminSection.style.display = 'none';
+      }
     });
 
-    // Quill
+    // 🧩 Quill Editor
     const quill = new Quill('#editor', {
       theme: 'snow',
-      placeholder: 'Write your article here...',
       modules: {
         toolbar: [
           [{ 'header': [1, 2, 3, false] }],
@@ -241,19 +198,8 @@
 
     function normalizeDriveLink(url) {
       if (!url) return "";
-      url = url.trim();
-      const patterns = [
-        /\/file\/d\/([a-zA-Z0-9_-]{10,})/,
-        /\/d\/([a-zA-Z0-9_-]{10,})/,
-        /[\?&]id=([a-zA-Z0-9_-]{10,})/,
-      ];
-      for (const re of patterns) {
-        const match = url.match(re);
-        if (match && match[1]) {
-          return `https://drive.google.com/uc?export=view&id=${match[1]}`;
-        }
-      }
-      return url;
+      const match = url.match(/[-\w]{25,}/);
+      return match ? `https://drive.google.com/uc?export=view&id=${match[0]}` : url;
     }
 
     function updatePreview() {
@@ -262,8 +208,8 @@
       const content = quill.root.innerHTML;
       const imageFile = imageInput.files[0];
       const driveLink = normalizeDriveLink(imageLink.value);
-
       let imgHTML = '';
+
       if (imageFile) {
         const imgUrl = URL.createObjectURL(imageFile);
         imgHTML = `<img src="${imgUrl}" alt="Preview Image">`;
@@ -271,12 +217,7 @@
         imgHTML = `<img src="${driveLink}" alt="Preview Image">`;
       }
 
-      previewContent.innerHTML = `
-        ${imgHTML}
-        <h4>${title}</h4>
-        <p><em>${summary}</em></p>
-        <div>${content}</div>
-      `;
+      previewContent.innerHTML = `${imgHTML}<h4>${title}</h4><p><em>${summary}</em></p><div>${content}</div>`;
     }
 
     titleInput.addEventListener('input', updatePreview);
@@ -334,11 +275,6 @@
     async function loadArticles() {
       articleList.innerHTML = "<p>Loading...</p>";
       const snapshot = await getDocs(collection(db, "articles"));
-      if (snapshot.empty) {
-        articleList.innerHTML = "<p>No articles yet.</p>";
-        return;
-      }
-
       articleList.innerHTML = "";
       snapshot.forEach(docSnap => {
         const data = docSnap.data();
@@ -361,44 +297,6 @@
           </div>
         `;
         articleList.appendChild(card);
-      });
-
-      document.querySelectorAll('.deleteBtn').forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-          const id = e.target.getAttribute('data-id');
-          if (confirm("Are you sure you want to delete this article?")) {
-            await deleteDoc(doc(db, "articles", id));
-            alert("🗑️ Article deleted.");
-            loadArticles();
-          }
-        });
-      });
-
-      document.querySelectorAll('.editBtn').forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-          const id = e.target.getAttribute('data-id');
-          const docSnap = snapshot.docs.find(d => d.id === id);
-          const data = docSnap.data();
-
-          titleInput.value = data.title;
-          summaryInput.value = data.summary;
-          quill.root.innerHTML = data.content;
-          imageLink.value = data.imageURL;
-          updatePreview();
-
-          publishBtn.textContent = "Update Article";
-          publishBtn.onclick = async () => {
-            await updateDoc(doc(db, "articles", id), {
-              title: titleInput.value,
-              summary: summaryInput.value,
-              content: quill.root.innerHTML,
-              imageURL: normalizeDriveLink(imageLink.value)
-            });
-            alert("✅ Article updated!");
-            publishBtn.textContent = "Publish Article";
-            loadArticles();
-          };
-        });
       });
     }
   </script>
