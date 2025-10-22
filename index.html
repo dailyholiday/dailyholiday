@@ -542,20 +542,21 @@
           width: 100% !important;
         }
       }
-      
-      /* ===== ARTICLE MODAL LAYOUT (FINAL SCROLL FIX) ===== */
+
+      /* ===== ARTICLE MODAL LAYOUT (FINAL — MOBILE SCROLL FIX) ===== */
       #articleModal {
         position: fixed;
         inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(0, 0, 0, 0.5); /* dim overlay */
+        background: rgba(0, 0, 0, 0.5);
         z-index: 1000;
         padding: 40px 20px;
+        overscroll-behavior: contain; /* prevent background scroll */
       }
       
-      /* Modal box container */
+      /* Modal container */
       #articleModal .modal-content {
         display: flex;
         flex-direction: row;
@@ -566,7 +567,7 @@
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
-        max-height: 90vh; /* ensures modal fits screen */
+        max-height: 90vh;
       }
       
       /* Image area */
@@ -584,43 +585,50 @@
         object-fit: cover;
       }
       
-      /* Text area (scrollable part) */
+      /* Text area (scrollable content) */
       #articleModal .modal-content .article-modal-content {
         flex: 0 0 60%;
         padding: 28px;
-        overflow-y: auto; /* <— allows scrolling only inside text area */
+        overflow-y: auto; /* enable scroll inside */
+        -webkit-overflow-scrolling: touch; /* <— iOS smooth scrolling */
         text-align: left;
+        max-height: 90vh;
       }
       
-      /* Disable main page scroll when modal open */
+      /* Disable background scroll */
       body.modal-open {
         overflow: hidden;
+        touch-action: none;
       }
       
       /* ===== Responsive ===== */
       @media (max-width: 768px) {
         #articleModal {
-          padding: 20px 0;
+          padding: 10px 0;
+          align-items: flex-start; /* start from top */
         }
       
         #articleModal .modal-content {
           flex-direction: column;
           width: 95%;
           max-height: 90vh;
-          margin: 10px 0;
+          margin: 20px auto;
         }
       
         #articleModal .modal-content #modalImageWrap {
           flex: none;
-          max-height: 45vh;
+          max-height: 40vh;
         }
       
         #articleModal .modal-content .article-modal-content {
           flex: none;
           padding: 20px;
-          overflow-y: auto; /* still scrollable on mobile */
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+          max-height: 50vh; /* ensure scrolling space for text */
         }
       }
+
     </style>
   </head>
 
@@ -1026,6 +1034,7 @@
 
 </body>
 </html>
+
 
 
 
