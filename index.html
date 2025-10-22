@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daily Holiday</title>
-  <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" type="image/png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Holiday</title>
+    <link
+      rel="icon"
+      href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s"
+      type="image/png"
+    />
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-  
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-  
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+
     <style>
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         scroll-behavior: smooth;
-        font-family: 'Poppins', sans-serif;
+        font-family: "Poppins", sans-serif;
       }
-  
+
       header {
         position: fixed;
         top: 0;
@@ -34,58 +44,59 @@
         justify-content: space-between;
         padding: 10px 40px;
       }
-  
+
       header img {
         height: 50px;
         margin-right: 10px;
         border-radius: 50%;
       }
-  
+
       header h1 {
-        font-family: 'Pacifico', cursive;
+        font-family: "Pacifico", cursive;
         font-size: 28px;
-        color: #0078FF;
+        color: #0078ff;
         font-weight: 400;
       }
-  
+
       nav ul {
         list-style: none;
         display: flex;
         gap: 20px;
       }
-  
+
       nav ul li a {
         text-decoration: none;
-        color: #0078FF;
+        color: #0078ff;
         font-weight: 500;
         transition: 0.3s;
       }
-  
+
       nav ul li a:hover {
         color: #005ed6;
       }
-  
+
       /* Mobile hamburger */
       .menu-toggle {
         display: none;
         font-size: 26px;
-        color: #0078FF;
+        color: #0078ff;
         cursor: pointer;
       }
-  
+
       @media (max-width: 768px) {
         header {
           justify-content: space-between;
         }
-        
+
         header div[style*="display:flex"] {
           flex: 1;
           justify-content: flex-start;
         }
-        
+
         .menu-toggle {
           margin-left: auto;
         }
+
         nav ul {
           display: none;
           position: absolute;
@@ -94,26 +105,27 @@
           background: white;
           flex-direction: column;
           width: 100%;
-          text-align: center; /* <-- centered links */
+          text-align: center;
           padding: 20px 0;
         }
-  
+
         nav ul.show {
           display: flex;
         }
-  
+
         .menu-toggle {
           display: block;
         }
       }
-  
+
       section {
         padding: 100px 10%;
       }
-  
+
       #home {
         height: 100vh;
-        background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+        background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e")
+          center/cover no-repeat;
         color: white;
         display: flex;
         align-items: center;
@@ -121,20 +133,20 @@
         flex-direction: column;
         text-align: center;
       }
-  
+
       #home img {
         width: 200px;
         border-radius: 50%;
         margin-bottom: 20px;
       }
-  
+
       #home p {
         font-size: 1.3rem;
         margin-top: 10px;
         letter-spacing: 1px;
         text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
       }
-  
+
       #about {
         text-align: left;
         padding-top: 120px;
@@ -144,51 +156,53 @@
         gap: 40px;
         flex-wrap: wrap;
       }
-  
+
       #about img {
         width: 400px;
         border-radius: 15px;
         object-fit: cover;
       }
-  
+
       #about h2 {
         font-size: 32px;
-        color: #0078FF;
+        color: #0078ff;
         margin-bottom: 20px;
-        text-align: center; /* <-- centered title */
+        text-align: center;
         width: 100%;
       }
-  
+
       #about p {
         max-width: 700px;
         line-height: 1.6;
         color: #555;
       }
-  
+
       /* Destination Grid */
-      #destinations, #domestic {
+      #destinations,
+      #domestic {
         background: #f9f9f9;
         padding-top: 120px;
         text-align: center;
       }
-  
-      #destinations h2, #domestic h2 {
+
+      #destinations h2,
+      #domestic h2 {
         font-size: 32px;
-        color: #0078FF;
+        color: #0078ff;
         margin-bottom: 30px;
       }
-  
+
       .grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         width: 100%;
       }
-  
+
       .destination {
         position: relative;
         overflow: hidden;
       }
-  
+
       .destination img {
         width: 100%;
         height: 250px;
@@ -197,12 +211,12 @@
         transition: transform 0.5s ease, filter 0.3s ease;
         image-rendering: auto;
       }
-  
+
       .destination:hover img {
         transform: scale(1.05);
         filter: brightness(85%);
       }
-  
+
       .destination span {
         position: absolute;
         bottom: 0;
@@ -219,17 +233,17 @@
         opacity: 0;
         transition: opacity 0.4s ease;
       }
-  
+
       .destination:hover span {
         opacity: 1;
       }
-  
+
       @media (max-width: 768px) {
         .grid {
           grid-template-columns: repeat(2, 1fr);
         }
       }
-  
+
       /* Instagram */
       #instagram {
         background: white;
@@ -237,13 +251,13 @@
         padding-top: 120px;
         margin-bottom: 0px;
       }
-  
+
       #instagram h2 {
         font-size: 32px;
-        color: #0078FF;
+        color: #0078ff;
         margin-bottom: 0px;
       }
-  
+
       #instagram iframe {
         border: none;
         width: 80%;
@@ -251,74 +265,74 @@
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       }
-  
+
       @media (max-width: 768px) {
         #instagram iframe {
           width: 90%;
           height: 350px;
         }
       }
-  
+
       /* Join Us */
       #joinus {
         background: #f5f8ff;
         padding: 80px 10%;
         text-align: center;
       }
-  
+
       #joinus h2 {
         font-size: 32px;
-        color: #0078FF;
+        color: #0078ff;
         margin-bottom: 20px;
       }
-  
+
       #joinus p {
         max-width: 700px;
         margin: 10px auto 30px;
         line-height: 1.6;
         color: #555;
       }
-  
+
       .contact-info p {
         line-height: 1.6;
         color: #333;
       }
-  
+
       .social-icons {
         margin-top: 20px;
       }
-  
+
       .social-icons a {
-        color: #0078FF;
+        color: #0078ff;
         font-size: 2rem;
         margin: 0 15px;
         transition: 0.3s;
         display: inline-block;
       }
-  
+
       .social-icons a:hover {
         color: #005ed6;
         transform: scale(1.1);
       }
-  
+
       footer {
-        background: #0078FF;
+        background: #0078ff;
         color: white;
         text-align: center;
         padding: 40px 10px;
         margin-top: 0;
       }
-  
+
       footer p {
         font-size: 14px;
       }
-  
+
       /* WhatsApp button */
       .whatsapp-btn {
         position: fixed;
         bottom: 20px;
         right: 20px;
-        background-color: #25D366;
+        background-color: #25d366;
         color: white;
         border-radius: 50%;
         width: 60px;
@@ -327,106 +341,101 @@
         align-items: center;
         justify-content: center;
         font-size: 30px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         z-index: 999;
         text-decoration: none;
         transition: transform 0.3s ease;
-        }
-    
-        .whatsapp-btn:hover {
-          transform: scale(1.1);
-        }
+      }
 
-        /* ARTICLE SECTION */
-        .articles-section {
-          padding: 60px 20px;
-          background-color: #f9f9f9;
-          text-align: center;
-        }
-        
-        /* Container that holds all cards */
+      .whatsapp-btn:hover {
+        transform: scale(1.1);
+      }
+
+      /* ARTICLE SECTION */
+      .articles-section {
+        padding: 60px 20px;
+        background-color: #f9f9f9;
+        text-align: center;
+      }
+
+      .articles-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        gap: 30px;
+        margin: 0 auto;
+        max-width: 1100px;
+      }
+
+      .article-card {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 320px;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease;
+        text-align: left;
+      }
+
+      .article-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .article-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .article-card-content {
+        padding: 20px;
+      }
+
+      .article-card-content h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #007bff;
+        margin-bottom: 10px;
+      }
+
+      .article-card-content p {
+        font-size: 14px;
+        color: #333;
+        line-height: 1.5;
+        margin-bottom: 10px;
+      }
+
+      .article-card-content a {
+        color: #007bff;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .article-card-content a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 992px) {
         .articles-container {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center; /* ✅ centers horizontally */
-          align-items: stretch;
-          gap: 30px; /* space between cards */
-          margin: 0 auto;
-          max-width: 1100px; /* ✅ limits total width so cards center perfectly */
+          max-width: 700px;
         }
-        
-        /* Each card */
         .article-card {
-          background: #fff;
-          border-radius: 15px;
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-          overflow: hidden;
-          width: 320px; /* ✅ fixed consistent width for clean alignment */
-          display: flex;
-          flex-direction: column;
-          transition: transform 0.3s ease;
-          text-align: left;
+          width: 45%;
         }
-        
-        .article-card:hover {
-          transform: translateY(-5px);
+      }
+
+      @media (max-width: 600px) {
+        .articles-container {
+          max-width: 100%;
         }
-        
-        /* Image */
-        .article-card img {
+        .article-card {
           width: 100%;
-          height: 200px;
-          object-fit: cover;
         }
-        
-        /* Content */
-        .article-card-content {
-          padding: 20px;
-        }
-        
-        .article-card-content h3 {
-          font-size: 18px;
-          font-weight: 700;
-          color: #007bff;
-          margin-bottom: 10px;
-        }
-        
-        .article-card-content p {
-          font-size: 14px;
-          color: #333;
-          line-height: 1.5;
-          margin-bottom: 10px;
-        }
-        
-        /* “Read More” link */
-        .article-card-content a {
-          color: #007bff;
-          font-weight: 600;
-          text-decoration: none;
-        }
-        .article-card-content a:hover {
-          text-decoration: underline;
-        }
-        
-        /* ✅ Responsive */
-        @media (max-width: 992px) {
-          .articles-container {
-            max-width: 700px;
-          }
-          .article-card {
-            width: 45%;
-          }
-        }
-        
-        @media (max-width: 600px) {
-          .articles-container {
-            max-width: 100%;
-          }
-          .article-card {
-            width: 100%;
-          }
-        }
-      /* Optional: limit modal width for nice layout */
+      }
+
       .modal-content {
         max-width: 90%;
         width: 900px;
@@ -435,29 +444,28 @@
         overflow-y: auto;
         max-height: 90vh;
       }
-    
-      /* Ensure mobile friendly */
+
       @media (max-width: 768px) {
         .modal-content {
           width: 95%;
           max-height: 85vh;
         }
       }
-    
+
       .article-modal-content ul,
       .article-modal-content ol {
         margin-left: 1.5em;
         padding-left: 1.5em;
       }
-    
+
       .article-modal-content li {
         margin-bottom: 0.4em;
       }
-    
+
       .article-modal-content strong {
         font-weight: 600;
       }
-    
+
       .article-modal-content p {
         margin-bottom: 0.6em;
       }
@@ -465,27 +473,25 @@
       .modal-article-image {
         width: 100%;
         height: auto;
-        max-height: 90vh; /* keeps image from overflowing screen */
+        max-height: 90vh;
         object-fit: contain !important;
         border-radius: 12px;
         display: block;
         margin: 0 auto;
-        background-color: #000; /* optional, for letterboxing effect */
+        background-color: #000;
       }
-      
+
       #articles-list {
-        /* use grid but center the grid area and limit width so cards center */
         display: grid !important;
-        grid-template-columns: repeat(3, 320px) !important; /* 3 cards per row */
-        justify-content: center !important; /* center the whole grid */
+        grid-template-columns: repeat(3, 320px) !important;
+        justify-content: center !important;
         gap: 28px !important;
-        max-width: 1100px; /* container max width */
-        margin: 0 auto; /* center container */
+        max-width: 1100px;
+        margin: 0 auto;
         padding: 0 16px;
         box-sizing: border-box;
       }
-      
-      /* Force card width & consistent look even if JS adds inline styles */
+
       .article-card {
         width: 320px !important;
         min-width: 0 !important;
@@ -495,19 +501,16 @@
         text-align: left;
         box-sizing: border-box;
       }
-      
-      /* Card internals */
+
       .article-card img {
         height: 200px;
         object-fit: cover;
       }
-      
-      /* Readjust the card content area class if necessary */
+
       .article-card > div {
         padding: 14px !important;
       }
-      
-      /* Responsive: 2 columns for medium screens, 1 column for mobile */
+
       @media (max-width: 992px) {
         #articles-list {
           grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
@@ -518,7 +521,7 @@
           max-width: none !important;
         }
       }
-      
+
       @media (max-width: 600px) {
         #articles-list {
           grid-template-columns: 1fr !important;
@@ -530,26 +533,82 @@
           width: 100% !important;
         }
       }
-  </style>
-</head>
-<body id="top">
-  <header>
-    <div style="display:flex;align-items:center;">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo" />
-      <h1 style="font-style: italic;">Daily Holiday</h1>
-    </div>
-    <div class="menu-toggle" id="menu-toggle"><i class="fa-solid fa-bars"></i></div>
-    <nav>
-      <ul id="menu">
-        <li><a href="#top">Home</a></li>
-        <li><a href="#destinations">International</a></li>
-        <li><a href="#domestic">Domestic</a></li>
-        <li><a href="#instagram">Promo</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#joinus">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+
+      /* ===== ARTICLE MODAL LAYOUT FIX ===== */
+      #articleModal > div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        background: #fff;
+        max-width: 1000px;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+      }
+
+      #modalImageWrap {
+        flex: 1 1 50%;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #articleModal > div > div:last-child {
+        flex: 1 1 50%;
+        padding: 24px;
+        max-height: 90vh;
+        overflow-y: auto;
+        text-align: left;
+      }
+
+      @media (max-width: 768px) {
+        #articleModal > div {
+          flex-direction: column;
+        }
+
+        #modalImageWrap {
+          flex: 1 1 100%;
+          max-height: 50vh;
+        }
+
+        #articleModal > div > div:last-child {
+          flex: 1 1 100%;
+          max-height: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body id="top">
+    <!-- header -->
+    <header>
+      <div style="display: flex; align-items: center">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s"
+          alt="Daily Holiday Logo"
+        />
+        <h1 style="font-style: italic">Daily Holiday</h1>
+      </div>
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a href="#top">Home</a></li>
+          <li><a href="#destinations">International</a></li>
+          <li><a href="#domestic">Domestic</a></li>
+          <li><a href="#instagram">Promo</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#joinus">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- rest of your code continues unchanged -->
+    <!-- ... -->
+
 
   <section id="home">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo" />
@@ -910,6 +969,7 @@
 
 </body>
 </html>
+
 
 
 
