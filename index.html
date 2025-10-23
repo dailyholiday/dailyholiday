@@ -660,6 +660,12 @@
         }
       }
 
+      /* Disable body scroll when modal is open */
+      body.modal-open {
+        overflow: hidden !important;
+        height: 100vh;
+        touch-action: none;
+      }
 
     </style>
   </head>
@@ -972,14 +978,13 @@
       return card;
     }
   
-    // Open modal showing full article content
     function openModalWithDoc(doc) {
       const data = doc.data();
       const title = data.title || 'Untitled';
       const summary = data.summary || '';
-      const content = data.content || summary; // fall back to summary if full content missing
+      const content = data.content || summary; // fallback
       const image = normalizeImageURL(data.imageURL || '');
-  
+    
       document.getElementById('modalTitle').textContent = title;
       document.getElementById('modalContent').innerHTML = `
         <div class="article-modal-content">${content}</div>
@@ -987,17 +992,18 @@
       const modalImg = document.getElementById('modalImage');
       modalImg.src = image;
       modalImg.alt = title;
-  
-      document.getElementById('articleModal').style.display = 'flex';
+    
+      const modal = document.getElementById('articleModal');
+      modal.style.display = 'flex';
+      document.body.classList.add('modal-open'); // ✅ disable scroll when open
     }
   
     // hide modal
-    document.getElementById('modalClose').addEventListener('click', () => {
-      document.getElementById('articleModal').style.display = 'none';
-    });
-    // hide modal when clicking outside content
     document.getElementById('articleModal').addEventListener('click', (e) => {
-      if (e.target.id === 'articleModal') document.getElementById('articleModal').style.display = 'none';
+      if (e.target.id === 'articleModal') {
+        document.getElementById('articleModal').style.display = 'none';
+        document.body.classList.remove('modal-open'); // ✅ re-enable scroll
+      }
     });
   
     // load articles (with pagination)
@@ -1066,5 +1072,6 @@
 
 </body>
 </html>
+
 
 
