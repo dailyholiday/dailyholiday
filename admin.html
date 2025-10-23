@@ -50,8 +50,6 @@
     }
     .article-card img { width: 100px; height: 70px; object-fit: cover; border-radius: 6px; margin-right: 15px; }
     .article-info { flex: 1; }
-
-    /* Login Page */
     #loginSection {
       max-width: 400px;
       margin: 100px auto;
@@ -113,17 +111,10 @@
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
-    import { 
-      getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut 
-    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
-    import { 
-      getFirestore, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, serverTimestamp 
-    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-    import { 
-      getStorage, ref, uploadBytes, getDownloadURL 
-    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, updateDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-storage.js";
 
-    // ✅ Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyBS7C50eMiRtQ4nge4HrXo0ZuEkKoIVIUE",
       authDomain: "daily-holiday.firebaseapp.com",
@@ -140,21 +131,20 @@
     const db = getFirestore(app);
     const storage = getStorage(app);
 
-    // 🔒 Auth UI
     const loginSection = document.getElementById('loginSection');
     const adminSection = document.getElementById('adminSection');
     const loginBtn = document.getElementById('loginBtn');
     const logoutBtn = document.getElementById('logoutBtn');
     const loginError = document.getElementById('loginError');
+    const articleList = document.getElementById('articleList');
 
     loginBtn.addEventListener('click', async () => {
       const email = document.getElementById('loginEmail').value;
       const password = document.getElementById('loginPassword').value;
-
       try {
         await signInWithEmailAndPassword(auth, email, password);
         loginError.style.display = 'none';
-      } catch (err) {
+      } catch {
         loginError.textContent = "❌ Invalid email or password.";
         loginError.style.display = 'block';
       }
@@ -173,19 +163,9 @@
       }
     });
 
-    // 🧩 Quill Editor
     const quill = new Quill('#editor', {
       theme: 'snow',
-      modules: {
-        toolbar: [
-          [{ 'header': [1, 2, 3, false] }],
-          ['bold', 'italic', 'underline', 'strike'],
-          [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-          [{ 'align': [] }],
-          ['link', 'image', 'blockquote', 'code-block'],
-          ['clean']
-        ]
-      }
+      modules: { toolbar: [[{ 'header': [1, 2, 3, false] }], ['bold', 'italic', 'underline', 'strike'], [{ 'list': 'ordered' }, { 'list': 'bullet' }], [{ 'align': [] }], ['link', 'image', 'blockquote', 'code-block'], ['clean']] }
     });
 
     const titleInput = document.getElementById('title');
@@ -194,7 +174,6 @@
     const imageLink = document.getElementById('imageLink');
     const publishBtn = document.getElementById('publishBtn');
     const previewContent = document.getElementById('previewContent');
-    const articleList = document.getElementById('articleList');
 
     function normalizeDriveLink(url) {
       if (!url) return "";
@@ -209,14 +188,8 @@
       const imageFile = imageInput.files[0];
       const driveLink = normalizeDriveLink(imageLink.value);
       let imgHTML = '';
-
-      if (imageFile) {
-        const imgUrl = URL.createObjectURL(imageFile);
-        imgHTML = `<img src="${imgUrl}" alt="Preview Image">`;
-      } else if (driveLink) {
-        imgHTML = `<img src="${driveLink}" alt="Preview Image">`;
-      }
-
+      if (imageFile) imgHTML = `<img src="${URL.createObjectURL(imageFile)}">`;
+      else if (driveLink) imgHTML = `<img src="${driveLink}">`;
       previewContent.innerHTML = `${imgHTML}<h4>${title}</h4><p><em>${summary}</em></p><div>${content}</div>`;
     }
 
@@ -232,17 +205,12 @@
       const content = quill.root.innerHTML;
       const imageFile = imageInput.files[0];
       const driveLink = normalizeDriveLink(imageLink.value);
-
-      if (!title || !summary || !content) {
-        alert("Please fill all fields before publishing.");
-        return;
-      }
+      if (!title || !summary || !content) return alert("Please fill all fields.");
 
       let imageURL = "";
+      publishBtn.disabled = true;
+      publishBtn.textContent = "Uploading...";
       try {
-        publishBtn.disabled = true;
-        publishBtn.textContent = "Uploading...";
-
         if (imageFile) {
           const storageRef = ref(storage, 'articles/' + imageFile.name);
           await uploadBytes(storageRef, imageFile);
@@ -250,22 +218,12 @@
         } else if (driveLink) {
           imageURL = driveLink;
         }
-
-        await addDoc(collection(db, "articles"), {
-          title, summary, content, imageURL, createdAt: serverTimestamp()
-        });
-
+        await addDoc(collection(db, "articles"), { title, summary, content, imageURL, createdAt: serverTimestamp() });
         alert("✅ Article published successfully!");
-        titleInput.value = "";
-        summaryInput.value = "";
-        imageInput.value = "";
-        imageLink.value = "";
-        quill.root.innerHTML = "";
-        previewContent.innerHTML = "";
+        titleInput.value = ""; summaryInput.value = ""; imageInput.value = ""; imageLink.value = ""; quill.root.innerHTML = ""; previewContent.innerHTML = "";
         loadArticles();
       } catch (err) {
-        console.error(err);
-        alert("❌ Error publishing article.");
+        console.error(err); alert("❌ Error publishing article.");
       } finally {
         publishBtn.disabled = false;
         publishBtn.textContent = "Publish Article";
@@ -282,11 +240,10 @@
         const image = data.imageURL || "";
         const title = data.title || "";
         const summary = data.summary || "";
-
         const card = document.createElement('div');
         card.className = 'article-card';
         card.innerHTML = `
-          <img src="${image}" alt="">
+          <img src="${image}">
           <div class="article-info">
             <strong>${title}</strong>
             <p>${summary.substring(0, 60)}...</p>
@@ -294,13 +251,51 @@
           <div>
             <button class="editBtn" data-id="${id}">Edit</button>
             <button class="danger deleteBtn" data-id="${id}">Delete</button>
-          </div>
-        `;
+          </div>`;
         articleList.appendChild(card);
+      });
+
+      // 🛠 Add button listeners after rendering
+      document.querySelectorAll('.deleteBtn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (confirm("Delete this article?")) {
+            await deleteDoc(doc(db, "articles", btn.dataset.id));
+            loadArticles();
+          }
+        });
+      });
+
+      document.querySelectorAll('.editBtn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const docSnap = snapshot.docs.find(d => d.id === btn.dataset.id);
+          if (!docSnap) return;
+          const data = docSnap.data();
+          titleInput.value = data.title || "";
+          summaryInput.value = data.summary || "";
+          quill.root.innerHTML = data.content || "";
+          imageLink.value = data.imageURL || "";
+          updatePreview();
+
+          publishBtn.textContent = "Update Article";
+          publishBtn.onclick = async () => {
+            await updateDoc(doc(db, "articles", btn.dataset.id), {
+              title: titleInput.value.trim(),
+              summary: summaryInput.value.trim(),
+              content: quill.root.innerHTML,
+              imageURL: normalizeDriveLink(imageLink.value)
+            });
+            alert("✅ Article updated!");
+            publishBtn.textContent = "Publish Article";
+            publishBtn.onclick = null;
+            titleInput.value = summaryInput.value = imageLink.value = "";
+            quill.root.innerHTML = "";
+            previewContent.innerHTML = "";
+            loadArticles();
+          };
+        });
       });
     }
   </script>
-
   <script src="https://cdn.quilljs.com/1.3.7/quill.js"></script>
 </body>
 </html>
