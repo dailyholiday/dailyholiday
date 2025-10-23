@@ -660,14 +660,14 @@
         }
       }
 
-      /* Disable body scroll when modal is open */
+      /* Prevent background scroll when modal is open */
       body.modal-open {
         overflow: hidden !important;
         height: 100vh;
         touch-action: none;
       }
-
-      /* Make modal scrollable on mobile */
+    
+      /* Modal backdrop */
       #articleModal {
         display: none;
         position: fixed;
@@ -679,17 +679,20 @@
         padding: 20px;
       }
     
+      /* Modal content box */
       #articleModal .modal-content {
+        position: relative;
         background: white;
         border-radius: 10px;
         max-width: 700px;
         width: 100%;
-        max-height: 90vh; /* ensures the modal fits in viewport */
-        overflow-y: auto; /* allows scroll inside modal */
+        max-height: 90vh; /* fits viewport */
+        overflow-y: auto; /* scroll inside modal */
         display: flex;
         flex-direction: column;
       }
     
+      /* Image full width */
       #articleModal img {
         width: 100%;
         height: auto;
@@ -702,7 +705,29 @@
         line-height: 1.6;
       }
     
-      /* On mobile, ensure no extra margin */
+      /* fade shadows for scroll indication */
+      .modal-content::before,
+      .modal-content::after {
+        content: "";
+        position: sticky;
+        left: 0;
+        right: 0;
+        height: 30px;
+        pointer-events: none;
+        z-index: 5;
+      }
+    
+      .modal-content::before {
+        top: 0;
+        background: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0));
+      }
+    
+      .modal-content::after {
+        bottom: 0;
+        background: linear-gradient(to top, rgba(255,255,255,0.95), rgba(255,255,255,0));
+      }
+    
+      /* Mobile style */
       @media (max-width: 768px) {
         #articleModal {
           align-items: flex-start;
@@ -714,7 +739,7 @@
           max-height: 100vh;
         }
       }
-
+      
     </style>
   </head>
 
@@ -1025,7 +1050,7 @@
   
       return card;
     }
-  
+
     function openModalWithDoc(doc) {
       const data = doc.data();
       const title = data.title || 'Untitled';
@@ -1041,8 +1066,13 @@
       modalImg.src = image;
       modalImg.alt = title;
     
-      document.getElementById('articleModal').style.display = 'flex';
+      const modal = document.getElementById('articleModal');
+      modal.style.display = 'flex';
       document.body.classList.add('modal-open'); // disable background scroll
+    
+      // 🧠 Reset modal scroll position to top each time
+      const modalContent = modal.querySelector('.modal-content');
+      if (modalContent) modalContent.scrollTop = 0;
     }
     
     // Close modal (button)
@@ -1125,6 +1155,7 @@
 
 </body>
 </html>
+
 
 
 
