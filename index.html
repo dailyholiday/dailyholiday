@@ -667,6 +667,54 @@
         touch-action: none;
       }
 
+      /* Make modal scrollable on mobile */
+      #articleModal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+    
+      #articleModal .modal-content {
+        background: white;
+        border-radius: 10px;
+        max-width: 700px;
+        width: 100%;
+        max-height: 90vh; /* ensures the modal fits in viewport */
+        overflow-y: auto; /* allows scroll inside modal */
+        display: flex;
+        flex-direction: column;
+      }
+    
+      #articleModal img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        border-radius: 10px 10px 0 0;
+      }
+    
+      .article-modal-content {
+        padding: 20px;
+        line-height: 1.6;
+      }
+    
+      /* On mobile, ensure no extra margin */
+      @media (max-width: 768px) {
+        #articleModal {
+          align-items: flex-start;
+          padding: 0;
+        }
+    
+        #articleModal .modal-content {
+          border-radius: 0;
+          max-height: 100vh;
+        }
+      }
+
     </style>
   </head>
 
@@ -982,7 +1030,7 @@
       const data = doc.data();
       const title = data.title || 'Untitled';
       const summary = data.summary || '';
-      const content = data.content || summary; // fallback
+      const content = data.content || summary;
       const image = normalizeImageURL(data.imageURL || '');
     
       document.getElementById('modalTitle').textContent = title;
@@ -993,16 +1041,21 @@
       modalImg.src = image;
       modalImg.alt = title;
     
-      const modal = document.getElementById('articleModal');
-      modal.style.display = 'flex';
-      document.body.classList.add('modal-open'); // ✅ disable scroll when open
+      document.getElementById('articleModal').style.display = 'flex';
+      document.body.classList.add('modal-open'); // disable background scroll
     }
-  
-    // hide modal
+    
+    // Close modal (button)
+    document.getElementById('modalClose').addEventListener('click', () => {
+      document.getElementById('articleModal').style.display = 'none';
+      document.body.classList.remove('modal-open'); // re-enable background scroll
+    });
+    
+    // Close modal (click outside)
     document.getElementById('articleModal').addEventListener('click', (e) => {
       if (e.target.id === 'articleModal') {
         document.getElementById('articleModal').style.display = 'none';
-        document.body.classList.remove('modal-open'); // ✅ re-enable scroll
+        document.body.classList.remove('modal-open');
       }
     });
   
@@ -1072,6 +1125,7 @@
 
 </body>
 </html>
+
 
 
 
