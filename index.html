@@ -22,725 +22,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     />
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        scroll-behavior: smooth;
-        font-family: "Poppins", sans-serif;
-      }
-
-      header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: white;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 40px;
-      }
-
-      header img {
-        height: 50px;
-        margin-right: 10px;
-        border-radius: 50%;
-      }
-
-      header h1 {
-        font-family: "Pacifico", cursive;
-        font-size: 28px;
-        color: #0078ff;
-        font-weight: 400;
-      }
-
-      nav ul {
-        list-style: none;
-        display: flex;
-        gap: 20px;
-      }
-
-      nav ul li a {
-        text-decoration: none;
-        color: #0078ff;
-        font-weight: 500;
-        transition: 0.3s;
-      }
-
-      nav ul li a:hover {
-        color: #005ed6;
-      }
-
-      /* Mobile hamburger */
-      .menu-toggle {
-        display: none;
-        font-size: 26px;
-        color: #0078ff;
-        cursor: pointer;
-      }
-
-      @media (max-width: 768px) {
-        header {
-          justify-content: space-between;
-        }
-
-        header div[style*="display:flex"] {
-          flex: 1;
-          justify-content: flex-start;
-        }
-
-        .menu-toggle {
-          margin-left: auto;
-        }
-
-        nav ul {
-          display: none;
-          position: absolute;
-          top: 70px;
-          right: 0;
-          background: white;
-          flex-direction: column;
-          width: 100%;
-          text-align: center;
-          padding: 20px 0;
-        }
-
-        nav ul.show {
-          display: flex;
-        }
-
-        .menu-toggle {
-          display: block;
-        }
-      }
-
-      section {
-        padding: 100px 10%;
-      }
-
-      #home {
-        height: 100vh;
-        background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e")
-          center/cover no-repeat;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-      }
-
-      #home img {
-        width: 200px;
-        border-radius: 50%;
-        margin-bottom: 20px;
-      }
-
-      #home p {
-        font-size: 1.3rem;
-        margin-top: 10px;
-        letter-spacing: 1px;
-        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-      }
-
-      #about {
-        text-align: left;
-        padding-top: 120px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 40px;
-        flex-wrap: wrap;
-        background: #ffffff;
-      }
-
-      #about img {
-        width: 400px;
-        border-radius: 15px;
-        object-fit: cover;
-      }
-
-      #about h2 {
-        font-size: 32px;
-        color: #0078ff;
-        margin-bottom: 20px;
-        text-align: center;
-        width: 100%;
-      }
-
-      #about p {
-        max-width: 700px;
-        line-height: 1.6;
-        color: #555;
-      }
-
-      /* Destination Grid */
-      #destinations,
-      #domestic {
-        padding-top: 120px;
-        text-align: center;
-      }
-
-      #destinations {
-        background: #f9f9f9;
-      }
-
-      #domestic {
-        background: #ffffff;
-      }
-
-      #destinations h2,
-      #domestic h2 {
-        font-size: 32px;
-        color: #0078ff;
-        margin-bottom: 30px;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        width: 100%;
-      }
-
-      .destination {
-        position: relative;
-        overflow: hidden;
-      }
-
-      .destination img {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.5s ease, filter 0.3s ease;
-        image-rendering: auto;
-      }
-
-      .destination:hover img {
-        transform: scale(1.05);
-        filter: brightness(85%);
-      }
-
-      .destination span {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0);
-        color: white;
-        font-size: 1.5rem;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-      }
-
-      .destination:hover span {
-        opacity: 1;
-      }
-
-      @media (max-width: 768px) {
-        .grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      /* Instagram */
-      #instagram {
-        background: white;
-        text-align: center;
-        padding-top: 120px;
-        margin-bottom: 0px;
-        background: #f9f9f9;
-      }
-
-      #instagram h2 {
-        font-size: 32px;
-        color: #0078ff;
-        margin-bottom: 0px;
-      }
-
-      #instagram iframe {
-        border: none;
-        width: 80%;
-        height: 700px;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      }
-
-      @media (max-width: 768px) {
-        #instagram iframe {
-          width: 90%;
-          height: 350px;
-        }
-      }
-
-      /* Join Us */
-      #joinus {
-        background: #f5f8ff;
-        padding: 80px 10%;
-        text-align: center;
-      }
-
-      #joinus h2 {
-        font-size: 32px;
-        color: #0078ff;
-        margin-bottom: 20px;
-      }
-
-      #joinus p {
-        max-width: 700px;
-        margin: 10px auto 30px;
-        line-height: 1.6;
-        color: #555;
-      }
-
-      .contact-info p {
-        line-height: 1.6;
-        color: #333;
-      }
-
-      .social-icons {
-        margin-top: 20px;
-      }
-
-      .social-icons a {
-        color: #0078ff;
-        font-size: 2rem;
-        margin: 0 15px;
-        transition: 0.3s;
-        display: inline-block;
-      }
-
-      .social-icons a:hover {
-        color: #005ed6;
-        transform: scale(1.1);
-      }
-
-      footer {
-        background: #0078ff;
-        color: white;
-        text-align: center;
-        padding: 40px 10px;
-        margin-top: 0;
-      }
-
-      footer p {
-        font-size: 14px;
-      }
-
-      /* WhatsApp button */
-      .whatsapp-btn {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        background-color: #25d366;
-        color: white;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 30px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        z-index: 999;
-        text-decoration: none;
-        transition: transform 0.3s ease;
-      }
-
-      .whatsapp-btn:hover {
-        transform: scale(1.1);
-      }
-
-      /* ARTICLE SECTION */
-      .articles-section {
-        padding: 60px 20px;
-        background-color: #f9f9f9;
-        text-align: center;
-      }
-
-      .articles-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: stretch;
-        gap: 30px;
-        margin: 0 auto;
-        max-width: 1100px;
-      }
-
-      .article-card {
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        width: 320px;
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.3s ease;
-        text-align: left;
-      }
-
-      .article-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .article-card img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-      }
-
-      .article-card-content {
-        padding: 20px;
-      }
-
-      .article-card-content h3 {
-        font-size: 18px;
-        font-weight: 700;
-        color: #007bff;
-        margin-bottom: 10px;
-      }
-
-      .article-card-content p {
-        font-size: 14px;
-        color: #333;
-        line-height: 1.5;
-        margin-bottom: 10px;
-      }
-
-      .article-card-content a {
-        color: #007bff;
-        font-weight: 600;
-        text-decoration: none;
-      }
-
-      .article-card-content a:hover {
-        text-decoration: underline;
-      }
-
-      @media (max-width: 992px) {
-        .articles-container {
-          max-width: 700px;
-        }
-        .article-card {
-          width: 45%;
-        }
-      }
-
-      @media (max-width: 600px) {
-        .articles-container {
-          max-width: 100%;
-        }
-        .article-card {
-          width: 100%;
-        }
-      }
-
-      .modal-content {
-        max-width: 90%;
-        width: 900px;
-        margin: auto;
-        border-radius: 15px;
-        overflow-y: auto;
-        max-height: 90vh;
-      }
-
-      @media (max-width: 768px) {
-        .modal-content {
-          width: 95%;
-          max-height: 85vh;
-        }
-      }
-
-      .article-modal-content ul,
-      .article-modal-content ol {
-        margin-left: 1.5em;
-        padding-left: 1.5em;
-      }
-
-      .article-modal-content li {
-        margin-bottom: 0.4em;
-      }
-
-      .article-modal-content strong {
-        font-weight: 600;
-      }
-
-      .article-modal-content p {
-        margin-bottom: 0.6em;
-      }
-
-      .modal-article-image {
-        width: 100%;
-        height: auto;
-        max-height: 90vh;
-        object-fit: contain !important;
-        border-radius: 12px;
-        display: block;
-        margin: 0 auto;
-        background-color: #000;
-      }
-
-      #articles-list {
-        display: grid !important;
-        grid-template-columns: repeat(3, 320px) !important;
-        justify-content: center !important;
-        gap: 28px !important;
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 0 16px;
-        box-sizing: border-box;
-      }
-
-      .article-card {
-        width: 320px !important;
-        min-width: 0 !important;
-        max-width: 320px !important;
-        display: flex;
-        flex-direction: column;
-        text-align: left;
-        box-sizing: border-box;
-      }
-
-      .article-card img {
-        height: 200px;
-        object-fit: cover;
-      }
-
-      .article-card > div {
-        padding: 14px !important;
-      }
-
-      @media (max-width: 992px) {
-        #articles-list {
-          grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
-          max-width: 760px;
-        }
-        .article-card {
-          width: 100% !important;
-          max-width: none !important;
-        }
-      }
-
-      @media (max-width: 600px) {
-        #articles-list {
-          grid-template-columns: 1fr !important;
-          gap: 18px;
-          max-width: 480px;
-          padding: 0 12px;
-        }
-        .article-card {
-          width: 100% !important;
-        }
-      }
-      
-      /* ===== ARTICLE MODAL LAYOUT (FINAL SCROLL FIX) ===== */
-      #articleModal {
-        position: fixed;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 0, 0, 0.5); /* dim overlay */
-        z-index: 1000;
-        padding: 40px 20px;
-      }
-      
-      /* Modal box container */
-      #articleModal .modal-content {
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        background: #fff;
-        max-width: 1000px;
-        width: 100%;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
-        max-height: 90vh; /* ensures modal fits screen */
-      }
-      
-      /* Image area */
-      #articleModal .modal-content #modalImageWrap {
-        flex: 0 0 40%;
-        background: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      #articleModal .modal-content #modalImageWrap img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      
-      /* Text area (scrollable part) */
-      #articleModal .modal-content .article-modal-content {
-        flex: 0 0 60%;
-        padding: 28px;
-        overflow-y: auto; /* <— allows scrolling only inside text area */
-        text-align: left;
-      }
-      
-      /* Disable main page scroll when modal open */
-      body.modal-open {
-        overflow: hidden;
-      }
-      
-      /* ===== Responsive ===== */
-      @media (max-width: 768px) {
-        #articleModal {
-          padding: 20px 0;
-        }
-      
-        #articleModal .modal-content {
-          flex-direction: column;
-          width: 95%;
-          max-height: 90vh;
-          margin: 10px 0;
-        }
-      
-        #articleModal .modal-content #modalImageWrap {
-          flex: none;
-          max-height: 45vh;
-        }
-      
-        #articleModal .modal-content .article-modal-content {
-          flex: none;
-          padding: 20px;
-          overflow-y: auto; /* still scrollable on mobile */
-        }
-      }
-
-      /* --- FIX: revert mobile modal layout to no-margin, single-scroll --- */
-      @media (max-width: 768px) {
-        #articleModal {
-          align-items: center !important;
-          justify-content: center !important;
-          padding: 0 !important;           /* remove extra margin around modal */
-          overflow-y: auto !important;
-          -webkit-overflow-scrolling: touch !important;
-        }
-      
-        #articleModal .modal-content {
-          flex-direction: column !important;
-          width: 95% !important;
-          max-height: 90vh !important;     /* keep height constrained */
-          margin: 0 !important;
-          border-radius: 8px !important;
-          overflow-y: auto !important;     /* single scroll inside modal */
-        }
-      
-        #articleModal .modal-content #modalImageWrap {
-          width: 100% !important;
-          max-height: 45vh !important;
-          overflow: hidden !important;
-        }
-      
-        #articleModal .modal-content #modalImageWrap img {
-          width: 100% !important;
-          height: auto !important;
-          object-fit: contain !important;  /* show full image */
-        }
-      
-        #articleModal .modal-content .article-modal-content {
-          flex: none !important;
-          padding: 20px !important;
-          overflow-y: visible !important;  /* only one scroll in modal */
-        }
-      }
-
-      /* Prevent background scroll when modal is open */
-      body.modal-open {
-        overflow: hidden !important;
-        height: 100vh;
-        touch-action: none;
-      }
-    
-      /* Modal backdrop */
-      #articleModal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.6);
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-      }
-    
-      /* Modal content box */
-      #articleModal .modal-content {
-        position: relative;
-        background: white;
-        border-radius: 10px;
-        max-width: 700px;
-        width: 100%;
-        max-height: 90vh; /* fits viewport */
-        overflow-y: auto; /* scroll inside modal */
-        display: flex;
-        flex-direction: column;
-      }
-    
-      /* Image full width */
-      #articleModal img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        border-radius: 10px 10px 0 0;
-      }
-    
-      .article-modal-content {
-        padding: 20px;
-        line-height: 1.6;
-      }
-    
-      /* fade shadows for scroll indication */
-      .modal-content::before,
-      .modal-content::after {
-        content: "";
-        position: sticky;
-        left: 0;
-        right: 0;
-        height: 30px;
-        pointer-events: none;
-        z-index: 5;
-      }
-    
-      .modal-content::before {
-        top: 0;
-        background: linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0));
-      }
-    
-      .modal-content::after {
-        bottom: 0;
-        background: linear-gradient(to top, rgba(255,255,255,0.95), rgba(255,255,255,0));
-      }
-    
-      /* Mobile style */
-      @media (max-width: 768px) {
-        #articleModal {
-          align-items: flex-start;
-          padding: 0;
-        }
-    
-        #articleModal .modal-content {
-          border-radius: 0;
-          max-height: 100vh;
-        }
-      }
-      
-    </style>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body id="top">
@@ -769,394 +52,174 @@
       </nav>
     </header>
 
-    <!-- rest of your code continues unchanged -->
-    <!-- ... -->
+    <!-- Main content (unchanged) -->
+    <section id="home">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s"
+        alt="Daily Holiday Logo"
+      />
+      <p>YOUR EVERYDAY PARTNER ✈️</p>
+    </section>
 
+    <section id="articles" style="padding:60px 8%;background:#ffffff;">
+      <h2
+        style="color:#0078FF;text-align:center;margin-bottom:24px;font-size:34px;"
+      >
+        Latest Travel Articles
+      </h2>
+      <div
+        id="articles-list"
+        style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;align-items:start;"
+      ></div>
 
-  <section id="home">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiwyHCThnIPlBmTh5QQjJlhrOpEpfDykiM1Q&s" alt="Daily Holiday Logo" />
-    <p>YOUR EVERYDAY PARTNER ✈️</p>
-  </section>
-  
-  <section id="articles" style="padding:60px 8%;background:#ffffff;">
-    <h2 style="color:#0078FF;text-align:center;margin-bottom:24px;font-size:34px;">Latest Travel Articles</h2>
-    <div id="articles-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;align-items:start;"></div>
-  
-    <div style="text-align:center;margin-top:26px;">
-      <button id="loadMoreBtn" style="background:#0078FF;color:#fff;border:none;padding:12px 20px;border-radius:8px;cursor:pointer;">Load more</button>
-      <p id="noMoreMsg" style="display:none;color:#666;margin-top:12px;">No more articles.</p>
-    </div>
-  </section>
-  
-  <!-- Modal (popout) -->
-  <div id="articleModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2000;align-items:center;justify-content:center;padding:20px;">
-    <div class="modal-content">
-      <div id="modalImageWrap" style="flex:1 1 100%;max-height:90vh;display:flex;justify-content:center;background:#000;">
-        <img id="modalImage" class="modal-article-image" src="" alt="Article Image">
+      <div style="text-align:center;margin-top:26px;">
+        <button
+          id="loadMoreBtn"
+          style="background:#0078FF;color:#fff;border:none;padding:12px 20px;border-radius:8px;cursor:pointer;"
+        >
+          Load more
+        </button>
+        <p id="noMoreMsg" style="display:none;color:#666;margin-top:12px;">
+          No more articles.
+        </p>
       </div>
-      <div class="article-modal-content">
-        <button id="modalClose" style="float:right;background:#eee;border:0;padding:6px 10px;border-radius:6px;cursor:pointer;margin:-14px -14px 10px 0;">Close ✕</button>
-        <h3 id="modalTitle" style="color:#0078FF;margin-top:8px;"></h3>
-        <div id="modalContent" style="color:#222;text-align:left;line-height:1.6;margin-top:12px;"></div>
+    </section>
+
+    <!-- Modal -->
+    <div
+      id="articleModal"
+      style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:2000;align-items:center;justify-content:center;padding:20px;"
+    >
+      <div class="modal-content">
+        <div
+          id="modalImageWrap"
+          style="flex:1 1 100%;max-height:90vh;display:flex;justify-content:center;background:#000;"
+        >
+          <img
+            id="modalImage"
+            class="modal-article-image"
+            src=""
+            alt="Article Image"
+          />
+        </div>
+        <div class="article-modal-content">
+          <button
+            id="modalClose"
+            style="float:right;background:#eee;border:0;padding:6px 10px;border-radius:6px;cursor:pointer;margin:-14px -14px 10px 0;"
+          >
+            Close ✕
+          </button>
+          <h3 id="modalTitle" style="color:#0078FF;margin-top:8px;"></h3>
+          <div
+            id="modalContent"
+            style="color:#222;text-align:left;line-height:1.6;margin-top:12px;"
+          ></div>
+        </div>
       </div>
     </div>
-  </div>
-  
-  <!-- Rest of your site stays the same -->
-  <section id="destinations">
-    <h2>International Destinations</h2>
-    <div class="grid">
-      <div class="destination"><img src="japan.png" alt="Japan"><span>Japan</span></div>
-      <div class="destination"><img src="korea.png" alt="Korea"><span>Korea</span></div>
-      <div class="destination"><img src="china.png" alt="China"><span>China</span></div>
-      <div class="destination"><img src="turkey.png" alt="Turkey"><span>Turkey</span></div>
-      <div class="destination"><img src="singapore.png" alt="Singapore"><span>Singapore</span></div>
-      <div class="destination"><img src="thailand.png" alt="Thailand"><span>Thailand</span></div>
-      <div class="destination"><img src="vietnam.png" alt="Vietnam"><span>Vietnam</span></div>
-      <div class="destination"><img src="newzealand.png" alt="New Zealand"><span>New Zealand</span></div>
-    </div>
-  </section>
 
-  <section id="domestic">
-    <h2>Domestic Destinations</h2>
-    <div class="grid">
-      <div class="destination"><img src="bandung.png" alt="Bandung"><span>Bandung</span></div>
-      <div class="destination"><img src="bali.png" alt="Bali"><span>Bali</span></div>
-      <div class="destination"><img src="bromo.png" alt="Bromo"><span>Bromo</span></div>
-      <div class="destination"><img src="malang.png" alt="Malang"><span>Malang</span></div>
-      <div class="destination"><img src="jakarta.png" alt="Jakarta"><span>Jakarta</span></div>
-      <div class="destination"><img src="labuanbajo.png" alt="Labuan Bajo"><span>Labuan Bajo</span></div>
-      <div class="destination"><img src="yogyakarta.png" alt="Yogyakarta"><span>Yogyakarta</span></div>
-      <div class="destination"><img src="dieng.png" alt="Dieng"><span>Dieng</span></div>
-    </div>
-  </section>
+    <!-- Other unchanged sections -->
+    <section id="destinations">
+      <h2>International Destinations</h2>
+      <div class="grid">
+        <div class="destination"><img src="japan.png" alt="Japan"><span>Japan</span></div>
+        <div class="destination"><img src="korea.png" alt="Korea"><span>Korea</span></div>
+        <div class="destination"><img src="china.png" alt="China"><span>China</span></div>
+        <div class="destination"><img src="turkey.png" alt="Turkey"><span>Turkey</span></div>
+        <div class="destination"><img src="singapore.png" alt="Singapore"><span>Singapore</span></div>
+        <div class="destination"><img src="thailand.png" alt="Thailand"><span>Thailand</span></div>
+        <div class="destination"><img src="vietnam.png" alt="Vietnam"><span>Vietnam</span></div>
+        <div class="destination"><img src="newzealand.png" alt="New Zealand"><span>New Zealand</span></div>
+      </div>
+    </section>
 
-  <section id="instagram">
-    <h2 style="margin-bottom:24px;">Take a look at our latest promo!</h2>
-    <iframe src="https://www.instagram.com/dailyholiday_travel/embed" allowfullscreen></iframe>
-  </section>
+    <section id="domestic">
+      <h2>Domestic Destinations</h2>
+      <div class="grid">
+        <div class="destination"><img src="bandung.png" alt="Bandung"><span>Bandung</span></div>
+        <div class="destination"><img src="bali.png" alt="Bali"><span>Bali</span></div>
+        <div class="destination"><img src="bromo.png" alt="Bromo"><span>Bromo</span></div>
+        <div class="destination"><img src="malang.png" alt="Malang"><span>Malang</span></div>
+        <div class="destination"><img src="jakarta.png" alt="Jakarta"><span>Jakarta</span></div>
+        <div class="destination"><img src="labuanbajo.png" alt="Labuan Bajo"><span>Labuan Bajo</span></div>
+        <div class="destination"><img src="yogyakarta.png" alt="Yogyakarta"><span>Yogyakarta</span></div>
+        <div class="destination"><img src="dieng.png" alt="Dieng"><span>Dieng</span></div>
+      </div>
+    </section>
 
-  <section id="about">
-    <h2>Slogan, Mission, and Vision of Daily Holiday</h2>
-    <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:40px;">
+    <section id="instagram">
+      <h2 style="margin-bottom:24px;">Take a look at our latest promo!</h2>
+      <iframe
+        src="https://www.instagram.com/dailyholiday_travel/embed"
+        allowfullscreen
+      ></iframe>
+    </section>
+
+    <section id="about">
+      <h2>Slogan, Mission, and Vision of Daily Holiday</h2>
+      <div
+        style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:40px;"
+      >
+        <p>
+          Our slogan, <em>"Your Everyday Partner"</em>, is not just a phrase but
+          a representation of our vision and mission to be more than just a
+          travel service provider. ...
+        </p>
+        <img src="founders.png" alt="Founders of Daily Holiday" />
+      </div>
+    </section>
+
+    <section id="joinus">
+      <h2>Join the Daily Holiday Experience!</h2>
       <p>
-        Our slogan, <em>"Your Everyday Partner"</em>, is not just a phrase but a representation of our vision and mission to be more than just a travel service provider. We strive to become a daily partner for our customers, not only during holidays but in every joyful moment of life.
-        <br><br>
-        <strong>• Daily Partner</strong><br>
-        We are committed to being an inseparable part of your daily life. From relaxing moments to shared adventures, PT Trindo Nuansa Wisata is here to be a consistent companion on your travel journey.
-        <br><br>
-        <strong>• Beyond Holiday</strong><br>
-        Our commitment goes beyond being a travel agency. We aim to be your trusted partner across all aspects of tourism — from hospitality and transportation to accommodation — always maintaining the highest service standards.
-        <br><br>
-        <strong>• Daily Holiday Vision</strong><br>
-        Our vision goes beyond limits. We aspire to not only be a travel provider but a driving force in advancing the tourism sector through innovation and exceptional service, bringing happiness to many.
+        Plan your journey with our experienced travel experts. Contact us for
+        free consultation and get the best advice for your unforgettable travel
+        experiences.
       </p>
-      <img src="founders.png" alt="Founders of Daily Holiday">
-    </div>
-  </section>
+      <div class="contact-info">
+        <p><strong>Phone:</strong> +62-813-8133-8233</p>
+        <p>
+          <strong>Email:</strong>
+          <a
+            href="mailto:partners@dailyholiday.co.id"
+            style="color:#0078FF;text-decoration:none;"
+            >partners@dailyholiday.co.id</a
+          >
+        </p>
+        <p>
+          <strong>Address:</strong><br />Ruko Scientia Residence<br />Jl.
+          Scientia Square Utara No.61<br />Kelapa Dua, Kab. Tangerang
+        </p>
+      </div>
+      <div class="social-icons">
+        <a
+          href="https://www.facebook.com/dailyholidaytour/"
+          target="_blank"
+          ><i class="fa-brands fa-facebook-f"></i
+        ></a>
+        <a
+          href="https://www.instagram.com/dailyholiday_travel/"
+          target="_blank"
+          ><i class="fa-brands fa-instagram"></i
+        ></a>
+      </div>
+    </section>
 
-  <section id="joinus">
-    <h2>Join the Daily Holiday Experience!</h2>
-    <p>
-      Plan your journey with our experienced travel experts. Contact us for free consultation and get the best advice for your unforgettable travel experiences.
-    </p>
-    <div class="contact-info">
-      <p><strong>Phone:</strong> +62-813-8133-8233</p>
-      <p><strong>Email:</strong> <a href="mailto:partners@dailyholiday.co.id" style="color:#0078FF;text-decoration:none;">partners@dailyholiday.co.id</a></p>
-      <p><strong>Address:</strong><br>Ruko Scientia Residence<br>Jl. Scientia Square Utara No.61<br>Kelapa Dua, Kab. Tangerang</p>
-    </div>
-    <div class="social-icons">
-      <a href="https://www.facebook.com/dailyholidaytour/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-      <a href="https://www.instagram.com/dailyholiday_travel/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-    </div>
-  </section>
+    <footer id="contact">
+      <p>© 2025 Daily Holiday. All Rights Reserved.</p>
+    </footer>
 
-  <footer id="contact">
-    <p>© 2025 Daily Holiday. All Rights Reserved.</p>
-  </footer>
+    <a
+      href="https://wa.me/6281381338233"
+      class="whatsapp-btn"
+      target="_blank"
+    >
+      <i class="fab fa-whatsapp"></i>
+    </a>
 
-  <a href="https://wa.me/6281381338233" class="whatsapp-btn" target="_blank">
-    <i class="fab fa-whatsapp"></i>
-  </a>
-
-  <script>
-    const toggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('menu');
-    const links = document.querySelectorAll('#menu a');
-
-    toggle.addEventListener('click', () => {
-      menu.classList.toggle('show');
-    });
-
-    links.forEach(link => {
-      link.addEventListener('click', () => {
-        menu.classList.remove('show');
-      });
-    });
-  </script>
-  
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBS7C50eMiRtQ4nge4HrXo0ZuEkKoIVIUE",
-      authDomain: "daily-holiday.firebaseapp.com",
-      projectId: "daily-holiday",
-      storageBucket: "daily-holiday.firebasestorage.app",
-      messagingSenderId: "51054604621",
-      appId: "1:51054604621:web:deffcd35458bb7c6b18704",
-      measurementId: "G-SX1PV7VLSX"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-  </script>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
-    import {
-      getFirestore, collection, query,
-      orderBy, limit, getDocs, startAfter
-    } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
-  
-    // ---------- YOUR FIREBASE CONFIG ----------
-    const firebaseConfig = {
-      apiKey: "AIzaSyBS7C50eMiRtQ4nge4HrXo0ZuEkKoIVIUE",
-      authDomain: "daily-holiday.firebaseapp.com",
-      projectId: "daily-holiday",
-      storageBucket: "daily-holiday.firebasestorage.app",
-      messagingSenderId: "51054604621",
-      appId: "1:51054604621:web:deffcd35458bb7c6b18704",
-      measurementId: "G-SX1PV7VLSX"
-    };
-    // -------------------------------------------
-  
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-  
-    const ARTICLES_PER_PAGE = 3;
-    const articlesListEl = document.getElementById('articles-list');
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    const noMoreMsg = document.getElementById('noMoreMsg');
-  
-    let lastVisibleDoc = null;
-    let finished = false;
-  
-    // helper: normalize various Google Drive links to a direct image URL (uc?export=view&id=ID)
-    function normalizeImageURL(url) {
-      if (!url) return url;
-      url = url.trim();
-  
-      // If it already looks like a direct image link, return it
-      const directImageExt = /\.(jpe?g|png|gif|webp|avif|svg)(\?.*)?$/i;
-      if (directImageExt.test(url)) return url;
-  
-      // Try multiple Google Drive patterns:
-      // /file/d/ID/view
-      // /d/ID/
-      // open?id=ID
-      // id=ID
-      const patterns = [
-        /\/file\/d\/([a-zA-Z0-9_-]{10,})/i,
-        /\/d\/([a-zA-Z0-9_-]{10,})/i,
-        /[\?&]id=([a-zA-Z0-9_-]{10,})/i,
-        /open\?id=([a-zA-Z0-9_-]{10,})/i
-      ];
-  
-      for (const re of patterns) {
-        const m = url.match(re);
-        if (m && m[1]) {
-          return `https://drive.google.com/uc?export=view&id=${m[1]}`;
-        }
-      }
-  
-      // As fallback, if it's a drive.google.com link without ID captured, attempt to extract last segment
-      try {
-        const u = new URL(url);
-        if (u.hostname.includes('drive.google.com')) {
-          const parts = u.pathname.split('/').filter(Boolean);
-          // try last path segment as id
-          const candidate = parts[parts.length - 1];
-          if (candidate && /^[a-zA-Z0-9_-]{10,}$/.test(candidate)) {
-            return `https://drive.google.com/uc?export=view&id=${candidate}`;
-          }
-        }
-      } catch (e) {
-        // not a valid URL; just return original
-      }
-  
-      // final fallback: return original URL (might work if it's a CDN link)
-      return url;
-    }
-  
-    // helper: truncate text to maxChars then append "... Read More"
-    function truncateSummary(text, maxChars = 50, docId='') {
-      if (!text) return "";
-      if (text.length <= maxChars) return `<span>${escapeHtml(text)}</span>`;
-      const truncated = escapeHtml(text.slice(0, maxChars).trim());
-      return `<span>${truncated}... </span><a href="#" class="read-more" data-id="${docId}">Read More</a>`;
-    }
-  
-    // simple html escape to avoid injection
-    function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-  
-    // render article card
-    function renderArticleCard(doc) {
-      const data = doc.data();
-      const id = doc.id;
-      const title = escapeHtml(data.title || 'Untitled');
-      const summary = data.summary || '';
-      const imageRaw = data.imageURL || '';
-      const image = normalizeImageURL(imageRaw);
-  
-      const card = document.createElement('div');
-      card.className = 'article-card';
-      card.style.background = '#fff';
-      card.style.borderRadius = '10px';
-      card.style.boxShadow = '0 6px 18px rgba(0,0,0,0.06)';
-      card.style.overflow = 'hidden';
-      card.style.display = 'flex';
-      card.style.flexDirection = 'column';
-  
-      card.innerHTML = `
-        <div style="width:100%;height:180px;overflow:hidden;">
-          <img src="${image}" alt="${title}" style="width:100%;height:100%;object-fit:cover;display:block;">
-        </div>
-        <div style="padding:14px;flex:1;display:flex;flex-direction:column;">
-          <h4 style="margin:0 0 8px;color:#0078FF;font-size:18px;">${title}</h4>
-          <div class="article-summary" style="flex:1;">${truncateSummary(summary, 50, id)}</div>
-        </div>
-      `;
-  
-      // attach click for Read More links inside summary
-      card.addEventListener('click', (e) => {
-        const target = e.target;
-        if (target.matches('a.read-more')) {
-          e.preventDefault();
-          openModalWithDoc(doc);
-        } else {
-          // clicking card (not link) can also open full article
-          openModalWithDoc(doc);
-        }
-      });
-  
-      return card;
-    }
-
-    function openModalWithDoc(doc) {
-      const data = doc.data();
-      const title = data.title || 'Untitled';
-      const summary = data.summary || '';
-      const content = data.content || summary;
-      const image = normalizeImageURL(data.imageURL || '');
-    
-      document.getElementById('modalTitle').textContent = title;
-      document.getElementById('modalContent').innerHTML = `
-        <div class="article-modal-content">${content}</div>
-      `;
-      const modalImg = document.getElementById('modalImage');
-      modalImg.src = image;
-      modalImg.alt = title;
-    
-      const modal = document.getElementById('articleModal');
-      modal.style.display = 'flex';
-      document.body.classList.add('modal-open'); // disable background scroll
-    
-      // 🧠 Reset modal scroll position to top each time
-      const modalContent = modal.querySelector('.modal-content');
-      if (modalContent) modalContent.scrollTop = 0;
-    }
-    
-    // Close modal (button)
-    document.getElementById('modalClose').addEventListener('click', () => {
-      document.getElementById('articleModal').style.display = 'none';
-      document.body.classList.remove('modal-open'); // re-enable background scroll
-    });
-    
-    // Close modal (click outside)
-    document.getElementById('articleModal').addEventListener('click', (e) => {
-      if (e.target.id === 'articleModal') {
-        document.getElementById('articleModal').style.display = 'none';
-        document.body.classList.remove('modal-open');
-      }
-    });
-  
-    // load articles (with pagination)
-    async function loadArticles() {
-      if (finished) return;
-      loadMoreBtn.disabled = true;
-      loadMoreBtn.textContent = 'Loading...';
-  
-      let q;
-      const articlesRef = collection(db, 'articles');
-  
-      if (!lastVisibleDoc) {
-        q = query(articlesRef, orderBy('createdAt', 'desc'), limit(ARTICLES_PER_PAGE));
-      } else {
-        q = query(articlesRef, orderBy('createdAt', 'desc'), startAfter(lastVisibleDoc), limit(ARTICLES_PER_PAGE));
-      }
-  
-      try {
-        const snap = await getDocs(q);
-        if (snap.empty) {
-          finished = true;
-          noMoreMsg.style.display = 'block';
-          loadMoreBtn.style.display = 'none';
-          return;
-        }
-        snap.forEach((doc) => {
-          const card = renderArticleCard(doc);
-          articlesListEl.appendChild(card);
-        });
-  
-        // set last visible for pagination
-        lastVisibleDoc = snap.docs[snap.docs.length - 1];
-  
-        // if less than page size returned -> no more
-        if (snap.docs.length < ARTICLES_PER_PAGE) {
-          finished = true;
-          noMoreMsg.style.display = 'block';
-          loadMoreBtn.style.display = 'none';
-        }
-      } catch (err) {
-        console.error('Error loading articles', err);
-      } finally {
-        loadMoreBtn.disabled = false;
-        loadMoreBtn.textContent = 'Load more';
-      }
-    }
-  
-    // initial load
-    loadArticles();
-  
-    loadMoreBtn.addEventListener('click', loadArticles);
-    function openModal() {
-      document.getElementById('articleModal').style.display = 'flex';
-      document.body.classList.add('modal-open'); // disable scroll
-    }
-    
-    // Close modal
-    document.getElementById('closeModal').addEventListener('click', () => {
-      document.getElementById('articleModal').style.display = 'none';
-      document.body.classList.remove('modal-open'); // enable scroll again
-    });
-    
-    document.body.classList.add('modal-open'); // when opening
-    document.body.classList.remove('modal-open'); // when closing
-  </script>
-
-</body>
+    <!-- External JS -->
+    <script src="main.js"></script>
+    <script type="module" src="firebase-init.js"></script>
+    <script type="module" src="articles.js"></script>
+  </body>
 </html>
-
-
-
-
-
